@@ -13,9 +13,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>ProjectHub</name>
     <description>Backend for Project Hub</description>
-    <properties>
+<!--    <properties>
         <java.version>11</java.version>
-    </properties>
+    </properties>-->
     <dependencies>
 
         <!--		Spring Essential-->
@@ -56,6 +56,14 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!--       Swagger API Documentation-->
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.2</version>
         </dependency>
     </dependencies>
 
