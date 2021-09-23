@@ -18,8 +18,8 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: maven
-        RDS_DB_NAME: "d6khiakjgah8sh"
-        RDS_HOSTNAME: "ec2-18-209-143-227.compute-1.amazonaws.com"
+        RDS_DB_NAME: d6khiakjgah8sh
+        RDS_HOSTNAME: ec2-18-209-143-227.compute-1.amazonaws.com
         RDS_PASSWORD: 401e23ef4689c5be75594da46456238624c261d619106fca47e6e736dc64359f
         RDS_PORT: 5432
         RDS_USERNAME: ierrhpyzsozbft
