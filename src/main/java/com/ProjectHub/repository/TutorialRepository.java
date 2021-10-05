@@ -1,4 +1,4 @@
-package com.ProjectHub;
+package com.ProjectHub.repository;
 
 import com.ProjectHub.model.Tutorial;
 import org.springframework.data.jpa.repository.JpaRepository;
