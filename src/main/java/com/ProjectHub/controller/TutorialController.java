@@ -1,6 +1,8 @@
-package com.ProjectHub;
+package com.ProjectHub.controller;
 
+import com.ProjectHub.repository.TutorialRepository;
 import com.ProjectHub.model.Tutorial;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,11 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.ProjectHub.util.Constants.BEARER_AUTH;
+
 /**
  * Created by Avinash Vijayvargiya on 22-09-2021.
  */
 
 @RestController
+@SecurityRequirement(name = BEARER_AUTH)
 @RequestMapping("/api")
 public class TutorialController {
 
