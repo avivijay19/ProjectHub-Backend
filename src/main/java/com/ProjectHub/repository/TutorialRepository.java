@@ -1,6 +1,6 @@
 package com.ProjectHub.repository;
 
-import com.ProjectHub.model.Tutorial;
+import com.ProjectHub.entities.Tutorial;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.ProjectHub.service;
 
 import com.ProjectHub.model.MyUserDetails;
-import com.ProjectHub.model.User;
+import com.ProjectHub.entities.StudentProfile;
 import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +23,7 @@ public class JPAUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(userName);
+        Optional<StudentProfile> user = userRepository.findByUsername(userName);
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
         return user.map(MyUserDetails::new).get();
     }

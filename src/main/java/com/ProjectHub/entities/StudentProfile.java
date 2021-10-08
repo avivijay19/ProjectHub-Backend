@@ -1,4 +1,4 @@
-package com.ProjectHub.model;
+package com.ProjectHub.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "studentsuserdetails")
-public class User implements Serializable {
+public class StudentProfile implements Serializable {
 
     private static final long serialVersionUID = 2364534L;
     @Id

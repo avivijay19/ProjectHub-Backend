@@ -1,8 +1,7 @@
 package com.ProjectHub.controller;
 
 import com.ProjectHub.repository.TutorialRepository;
-import com.ProjectHub.model.Tutorial;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import com.ProjectHub.entities.Tutorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
