@@ -1,5 +1,6 @@
 package com.ProjectHub.model;
 
+import com.ProjectHub.entities.StudentProfile;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,11 +21,11 @@ public class MyUserDetails implements UserDetails {
     private boolean active;
     private List<GrantedAuthority> authorities;
 
-    public MyUserDetails(User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.active = user.isActive();
-        this.authorities = Arrays.stream(user.getRoles().split(","))
+    public MyUserDetails(StudentProfile studentProfile) {
+        this.username = studentProfile.getUsername();
+        this.password = studentProfile.getPassword();
+        this.active = studentProfile.isActive();
+        this.authorities = Arrays.stream(studentProfile.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }

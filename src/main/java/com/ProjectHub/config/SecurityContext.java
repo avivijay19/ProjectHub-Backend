@@ -51,7 +51,7 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/studentlogin","/v3/**", "/swagger-resources/**", "/swagger-ui/**", "/webjars/**",
+                .authorizeRequests().antMatchers("/studentlogin","/api/**","/v3/**", "/swagger-resources/**", "/swagger-ui/**", "/webjars/**",
                         /* Probably not needed */ "/swagger.json"
                 ).permitAll().
                 anyRequest().authenticated().and().

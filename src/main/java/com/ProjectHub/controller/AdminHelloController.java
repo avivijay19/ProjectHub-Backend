@@ -1,4 +1,4 @@
-package com.ProjectHub.controller.admin;
+package com.ProjectHub.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.GetMapping;

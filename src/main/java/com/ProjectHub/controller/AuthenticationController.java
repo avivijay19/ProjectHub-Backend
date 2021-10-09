@@ -1,4 +1,4 @@
-package com.ProjectHub.controller.admin;
+package com.ProjectHub.controller;
 
 import com.ProjectHub.model.AuthenticationRequest;
 import com.ProjectHub.model.AuthenticationResponse;
