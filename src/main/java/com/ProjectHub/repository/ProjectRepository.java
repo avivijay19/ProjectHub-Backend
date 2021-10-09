@@ -2,6 +2,7 @@ package com.ProjectHub.repository;
 
 import com.ProjectHub.entities.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ import java.util.Optional;
  */
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-//    List<Project> findByTitleContaining(String title);
+    List<Project> getProjectByProjectId(Long id);
 
     Optional<Project> findByProjectId (Long id);
 }
