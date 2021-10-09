@@ -1,6 +1,5 @@
 package com.ProjectHub.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +10,6 @@ import javax.persistence.*;
  */
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "project")
@@ -49,6 +47,19 @@ public class Project {
     @Column(name = "paperUrl")
     private String paperUrl;
 
-    @Column(name = "approvedByTeacher", columnDefinition = "0")
-    private int approvedByTeacher;
+    @Column(name = "approvedByTeacher")
+    private String approvedByTeacher;
+
+    public Project(String projectTitle, String projectDomain, String description, String projectTag1, String projectTag2, String projectTag3, String imageUrl, String pptUrl, String paperUrl, String approvedByTeacher) {
+        this.projectTitle = projectTitle;
+        this.projectDomain = projectDomain;
+        this.description = description;
+        this.projectTag1 = projectTag1;
+        this.projectTag2 = projectTag2;
+        this.projectTag3 = projectTag3;
+        this.imageUrl = imageUrl;
+        this.pptUrl = pptUrl;
+        this.paperUrl = paperUrl;
+        this.approvedByTeacher = approvedByTeacher;
+    }
 }

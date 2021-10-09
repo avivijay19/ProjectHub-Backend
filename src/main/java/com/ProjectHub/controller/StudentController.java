@@ -18,15 +18,19 @@ import java.util.Optional;
 @RestController
 //@SecurityRequirement(name = BEARER_AUTH)
 @RequestMapping("/api")
-public class ProjectController {
+public class StudentController {
 
     @Autowired
     ProjectRepository projectRepository;
 
-    @GetMapping("/projects")
-    public ResponseEntity<List<Project>> getAllTutorials(@RequestParam(required = false) Long id) {
+    /**
+     * @param id
+     * @return
+     */
+    @GetMapping("/studentProject")
+    public ResponseEntity<List<Project>> getAllProjects(@RequestParam(required = false) Long id) {
         try {
-            List<Project> tutorials = new ArrayList<Project>();
+            List<Project> tutorials = new ArrayList<>();
 
             if (id == null)
                 tutorials.addAll(projectRepository.findAll());
@@ -42,25 +46,28 @@ public class ProjectController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/projects/{id}")
-    public ResponseEntity<Project> getProjectById(@PathVariable("id") long id) {
-        Optional<Project> projectById = projectRepository.findByProjectId(id);
-        return projectById.map(project -> new ResponseEntity<>(project, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
 
-//    @PostMapping("/tutorials")
-//    public ResponseEntity<Project> createTutorial(@RequestBody Project tutorial) {
-//        try {
-//            Project _tutorial = projectRepository
-//                    .save(new Project(tutorial.getProjectTitle()
-//                            , tutorial.getProjectDomain(), tutorial.getDescription(),
-//                            tutorial.getProjectTag1(), tutorial.getProjectTag2(), tutorial.getProjectTag3(),
-//                            tutorial.getImageUrl(), tutorial.getPptUrl(), tutorial.getPaperUrl(), false));
-//            return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
+    /**
+     * @param project
+     * @return
+     */
+    @PostMapping("/studentProject")
+    public ResponseEntity<Project> getDetailedProject(@RequestBody Project project) {
+        try {
+            Project _project = projectRepository
+                    .save(new Project(project.getProjectTitle(), project.getProjectDomain(), project.getDescription(), project.getProjectTag1(), project.getProjectTag2(), project.getProjectTag3(), project.getImageUrl(), project.getPptUrl(), project.getPaperUrl(),"0"));
+            return new ResponseEntity<>(_project, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+//    @GetMapping("/projects/{id}")
+//    public ResponseEntity<Project> getProjectById(@PathVariable("id") long id) {
+//        Optional<Project> projectById = projectRepository.findByProjectId(id);
+//        return projectById.map(project -> new ResponseEntity<>(project, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 //    }
+
+
 
 //    @PutMapping("/tutorials/{id}")
 //    public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
