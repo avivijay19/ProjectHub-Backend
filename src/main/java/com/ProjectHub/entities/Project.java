@@ -3,8 +3,6 @@ package com.ProjectHub.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
@@ -51,6 +49,6 @@ public class Project {
     @Column(name = "paperUrl")
     private String paperUrl;
 
-    @Column(name = "approvedByTeacher", columnDefinition = "false")
-    private Boolean approvedByTeacher;
+    @Column(name = "approvedByTeacher", columnDefinition = "0")
+    private int approvedByTeacher;
 }
