@@ -2,6 +2,7 @@ package com.ProjectHub.controller;
 
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.entities.Project;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.ProjectHub.util.Constants.BEARER_AUTH;
 
 /**
  * Created by Avinash Vijayvargiya on 22-09-2021.
@@ -61,11 +64,7 @@ public class StudentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//    @GetMapping("/projects/{id}")
-//    public ResponseEntity<Project> getProjectById(@PathVariable("id") long id) {
-//        Optional<Project> projectById = projectRepository.findByProjectId(id);
-//        return projectById.map(project -> new ResponseEntity<>(project, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
+
 
 
 
