@@ -1,7 +1,9 @@
 package com.ProjectHub.controller;
 
+import com.ProjectHub.model.StudentProfileModel;
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.entities.Project;
+import com.ProjectHub.service.StudentProfileService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +21,15 @@ import static com.ProjectHub.util.Constants.BEARER_AUTH;
  */
 
 @RestController
-//@SecurityRequirement(name = BEARER_AUTH)
+@SecurityRequirement(name = BEARER_AUTH)
 @RequestMapping("/api")
 public class StudentController {
 
     @Autowired
     ProjectRepository projectRepository;
+
+    @Autowired
+    StudentProfileService studentProfileService;
 
     /**
      * @param id
@@ -65,41 +70,8 @@ public class StudentController {
         }
     }
 
-
-
-
-//    @PutMapping("/tutorials/{id}")
-//    public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
-//        Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
-//
-//        if (tutorialData.isPresent()) {
-//            Tutorial _tutorial = tutorialData.get();
-//            _tutorial.setTitle(tutorial.getTitle());
-//            _tutorial.setDescription(tutorial.getDescription());
-//            _tutorial.setPublished(tutorial.isPublished());
-//            return new ResponseEntity<>(tutorialRepository.save(_tutorial), HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-
-//    @DeleteMapping("/tutorials/{id}")
-//    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
-//        try {
-//            tutorialRepository.deleteById(id);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
-//    @DeleteMapping("/tutorials")
-//    public ResponseEntity<HttpStatus> deleteAllTutorials() {
-//        try {
-//            tutorialRepository.deleteAll();
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @GetMapping("/studentProfileDetails")
+    public ResponseEntity<StudentProfileModel> getStudentProfile(@RequestParam String username){
+        return ResponseEntity.ok(studentProfileService.getStudentProfileByUsername(username));
+    }
 }
