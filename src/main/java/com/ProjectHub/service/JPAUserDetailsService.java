@@ -23,8 +23,7 @@ public class JPAUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<StudentProfile> user = Optional.ofNullable(userRepository.findByUsername(userName));
-        assert user.isPresent();
+        Optional<StudentProfile> user = userRepository.findByUsername(userName);
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
         return user.map(MyUserDetails::new).get();
     }
