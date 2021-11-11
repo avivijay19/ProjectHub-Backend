@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentProfileModel {
+    private String username;
     private String firstName;
     private String lastName;
+    private String emailId;
+    private String department;
 }

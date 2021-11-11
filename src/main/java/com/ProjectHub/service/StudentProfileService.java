@@ -5,8 +5,6 @@ import com.ProjectHub.exceptions.ResourceNotFoundException;
 import com.ProjectHub.model.StudentProfileModel;
 import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -20,11 +18,13 @@ public class StudentProfileService {
 
     public StudentProfileModel getStudentProfileByUsername(String username){
         StudentProfileModel studentProfileModel = new StudentProfileModel();
-        StudentProfile studentProfile =  userRepository.findByUsername(username).
+        StudentProfile studentProfile = userRepository.findByUsername(username).
                 orElseThrow(() -> new ResourceNotFoundException("Student with id: " + username + " not found."));
+        studentProfileModel.setUsername(studentProfile.getUsername());
         studentProfileModel.setFirstName(studentProfile.getFirstName());
         studentProfileModel.setLastName(studentProfile.getLastName());
+        studentProfileModel.setEmailId(studentProfile.getEmailId());
+        studentProfileModel.setDepartment(studentProfile.getDepartment());
         return studentProfileModel;
     }
-
 }

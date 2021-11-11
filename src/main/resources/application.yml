@@ -10,3 +10,4 @@ spring:
         dialect: org.hibernate.dialect.PostgresPlusDialect
     hibernate:
       ddl-auto: update
+    show-sql: true
