@@ -1,0 +1,13 @@
+delete from studentsuserdetails;
+
+insert into studentsuserdetails(username, department,email_id,first_name,last_name,password,roles)
+values (11911407,'Computer Science','avinash.vijayvargiya19@vit.edu', 'Avinash', 'Vijayvargiya', '11911407','ROLE_ADMIN');
+
+insert into studentsuserdetails(username, department,email_id,first_name,last_name,password,roles)
+values (11910219,'Computer Science','anjali.asolkar19@vit.edu', 'Anjali', 'Asolkar', '11910219','ROLE_ADMIN');
+
+insert into studentsuserdetails(username, department,email_id,first_name,last_name,password,roles)
+values (11911404,'Computer Science','anubhav.pabby19@vit.edu', 'Anubhav', 'Pabby', '11911404','ROLE_ADMIN');
+
+insert into studentsuserdetails(username, department,email_id,first_name,last_name,password,roles)
+values (11911391,'Computer Science','dhanshree.pajankar19@vit.edu', 'Dhanshree', 'Pajankar', '11911391','ROLE_ADMIN');
