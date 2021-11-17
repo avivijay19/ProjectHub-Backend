@@ -46,14 +46,14 @@ public class TeacherController {
         }
     }
 
-    /**
+/*    *//**
      * fetch all the details of the ongoing project for the teacher.
      * @param id
      * @return
-     */
+     *//*
     @GetMapping("/projects/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable("id") long id) {
         Optional<Project> projectById = projectRepository.findByProjectId(id);
         return projectById.map(project -> new ResponseEntity<>(project, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+    }*/
 }
