@@ -6,10 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import static com.ProjectHub.util.Constants.PROJECT_APPROVED;
-
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Avinash Vijayvargiya on 22-09-2021.
