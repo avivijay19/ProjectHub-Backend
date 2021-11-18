@@ -1,5 +1,6 @@
 package com.ProjectHub.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "project")
 public class Project {
@@ -50,16 +52,23 @@ public class Project {
     @Column(name = "approvedByTeacher")
     private String approvedByTeacher;
 
-    public Project(String projectTitle, String projectDomain, String description, String projectTag1, String projectTag2, String projectTag3, String imageUrl, String pptUrl, String paperUrl, String approvedByTeacher) {
-        this.projectTitle = projectTitle;
-        this.projectDomain = projectDomain;
-        this.description = description;
-        this.projectTag1 = projectTag1;
-        this.projectTag2 = projectTag2;
-        this.projectTag3 = projectTag3;
-        this.imageUrl = imageUrl;
-        this.pptUrl = pptUrl;
-        this.paperUrl = paperUrl;
-        this.approvedByTeacher = approvedByTeacher;
-    }
+    // Team and Guide
+
+    @Column(name = "guideID")
+    private Long guideID;
+
+    @Column(name = "student1id")
+    private Long student1id;
+
+    @Column(name = "student2id")
+    private Long student2id;
+
+    @Column(name = "student3id")
+    private Long student3id;
+
+    @Column(name = "student4id")
+    private Long student4id;
+
+    @Column(name = "student5id", nullable = false)
+    private Long student5id;
 }

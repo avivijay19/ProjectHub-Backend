@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,4 +14,5 @@ public class ProjectProfileModel {
     private String projectTag1;
     private String projectTag2;
     private String projectTag3;
+    private Long guideID;
 }
