@@ -43,6 +43,32 @@ public class StudentProfile implements Serializable {
     @Column(name = "roles")
     private String roles;
 
+    //    Projects
+
+    @Column(name = "project1id", nullable = false)
+    private Long project1id;
+
+    @Column(name = "project2id", nullable = false)
+    private Long project2id;
+
+    @Column(name = "project3id", nullable = false)
+    private Long project3id;
+
+    @Column(name = "project4id", nullable = false)
+    private Long project4id;
+
+    @Column(name = "project5id", nullable = false)
+    private Long project5id;
+
+    @Column(name = "project6id", nullable = false)
+    private Long project6id;
+
+    @Column(name = "project7id", nullable = false)
+    private Long project7id;
+
+    @Column(name = "project8id", nullable = false)
+    private Long project8id;
+
     //    public String getUsername() {
 //        return username;
 //    }

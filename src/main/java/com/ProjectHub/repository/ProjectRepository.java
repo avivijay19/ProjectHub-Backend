@@ -17,10 +17,7 @@ import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> getProjectByProjectId(Long id);
-
-    Optional<Project> findByProjectId (Long id);
-
-
+    Project findByProjectId (Long id);
 
     @Modifying
     @Query("update Project p set p.approvedByTeacher = ?1 where p.projectId = ?2")
