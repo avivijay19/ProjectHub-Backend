@@ -1,20 +1,19 @@
 package com.ProjectHub.controller;
 
+import com.ProjectHub.entities.Project;
 import com.ProjectHub.model.StudentProfileModel;
 import com.ProjectHub.repository.ProjectRepository;
-import com.ProjectHub.entities.Project;
 import com.ProjectHub.service.StudentProfileService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static com.ProjectHub.util.Constants.BEARER_AUTH;
 
 /**
  * Created by Avinash Vijayvargiya on 22-09-2021.
@@ -55,11 +54,7 @@ public class StudentController {
         }
     }
 
-    /**
-     * @param project
-     * @return
-     */
-    @PostMapping("/studentProject")
+/*    @PostMapping("/studentProject")
     public ResponseEntity<Project> getDetailedProject(@RequestBody Project project) {
         try {
             Project _project = projectRepository
@@ -68,10 +63,16 @@ public class StudentController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }*/
+
+    @GetMapping("/studentProjectDetails")
+    public ResponseEntity<Project> getProjectDetails(@RequestParam Long projectId) {
+        return ResponseEntity.ok(projectRepository.findByProjectId(projectId));
     }
 
+
     @GetMapping("/studentProfileDetails")
-    public ResponseEntity<StudentProfileModel> getStudentProfile(@RequestParam String username){
+    public ResponseEntity<StudentProfileModel> getStudentProfile(@RequestParam String username) {
         return ResponseEntity.ok(studentProfileService.getStudentProfileByUsername(username));
     }
 }
