@@ -1,16 +1,15 @@
 package com.ProjectHub.controller;
 
 import com.ProjectHub.entities.Project;
+import com.ProjectHub.model.ProjectSubmissionModel;
 import com.ProjectHub.model.StudentProfileModel;
 import com.ProjectHub.repository.ProjectRepository;
+import com.ProjectHub.service.ProjectProfileService;
 import com.ProjectHub.service.StudentProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +28,9 @@ public class StudentController {
 
     @Autowired
     StudentProfileService studentProfileService;
+
+    @Autowired
+    ProjectProfileService projectProfileService;
 
     /**
      * @param id
@@ -54,7 +56,7 @@ public class StudentController {
         }
     }
 
-/*    @PostMapping("/studentProject")
+/*  @PostMapping("/studentProject")
     public ResponseEntity<Project> getDetailedProject(@RequestBody Project project) {
         try {
             Project _project = projectRepository
@@ -65,11 +67,15 @@ public class StudentController {
         }
     }*/
 
-    @GetMapping("/studentProjectDetails")
-    public ResponseEntity<Project> getProjectDetails(@RequestParam Long projectId) {
-        return ResponseEntity.ok(projectRepository.findByProjectId(projectId));
+    @PostMapping("/studentProject")
+    public ResponseEntity<Project> updateProjectDetails(@RequestBody ProjectSubmissionModel projectSubmissionModel) {
+        try {
+            Project project = projectProfileService.updateProject(projectSubmissionModel);
+            return new ResponseEntity<>(project, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
-
 
     @GetMapping("/studentProfileDetails")
     public ResponseEntity<StudentProfileModel> getStudentProfile(@RequestParam String username) {

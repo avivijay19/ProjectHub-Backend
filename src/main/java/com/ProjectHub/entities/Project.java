@@ -14,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+//@DynamicUpdate
 @Table(name = "project")
 public class Project {
 
@@ -21,17 +22,17 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long projectId;
 
-    @Column(name = "projectTitle", nullable = false)
+    @Column(name = "projectTitle")
     private String projectTitle;
 
-    @Column(name = "projectDomain", nullable = false)
+    @Column(name = "projectDomain")
     private String projectDomain;
 
-    @Column(name = "projectDescription", nullable = false)
+    @Column(name = "projectDescription")
 //    @Size(max = 250)
     private String description;
 
-    @Column(name = "projectTag1", nullable = false)
+    @Column(name = "projectTag1")
     private String projectTag1;
 
     @Column(name = "projectTag2")
@@ -57,18 +58,18 @@ public class Project {
     @Column(name = "guideID")
     private Long guideID;
 
-    @Column(name = "student1id")
+    @Column(name = "student1id", nullable = false)
     private Long student1id;
 
-    @Column(name = "student2id")
+    @Column(name = "student2id", nullable = false)
     private Long student2id;
 
-    @Column(name = "student3id")
+    @Column(name = "student3id", nullable = false)
     private Long student3id;
 
-    @Column(name = "student4id")
+    @Column(name = "student4id", nullable = false)
     private Long student4id;
 
-    @Column(name = "student5id", nullable = false)
+    @Column(name = "student5id")
     private Long student5id;
 }
