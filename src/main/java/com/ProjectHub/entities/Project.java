@@ -1,5 +1,6 @@
 package com.ProjectHub.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,9 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
+//@DynamicUpdate
 @Table(name = "project")
 public class Project {
 
@@ -19,17 +22,17 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long projectId;
 
-    @Column(name = "projectTitle", nullable = false)
+    @Column(name = "projectTitle")
     private String projectTitle;
 
-    @Column(name = "projectDomain", nullable = false)
+    @Column(name = "projectDomain")
     private String projectDomain;
 
-    @Column(name = "projectDescription", nullable = false)
+    @Column(name = "projectDescription")
 //    @Size(max = 250)
     private String description;
 
-    @Column(name = "projectTag1", nullable = false)
+    @Column(name = "projectTag1")
     private String projectTag1;
 
     @Column(name = "projectTag2")
@@ -50,16 +53,23 @@ public class Project {
     @Column(name = "approvedByTeacher")
     private String approvedByTeacher;
 
-    public Project(String projectTitle, String projectDomain, String description, String projectTag1, String projectTag2, String projectTag3, String imageUrl, String pptUrl, String paperUrl, String approvedByTeacher) {
-        this.projectTitle = projectTitle;
-        this.projectDomain = projectDomain;
-        this.description = description;
-        this.projectTag1 = projectTag1;
-        this.projectTag2 = projectTag2;
-        this.projectTag3 = projectTag3;
-        this.imageUrl = imageUrl;
-        this.pptUrl = pptUrl;
-        this.paperUrl = paperUrl;
-        this.approvedByTeacher = approvedByTeacher;
-    }
+    // Team and Guide
+
+    @Column(name = "guideID")
+    private Long guideID;
+
+    @Column(name = "student1id", nullable = false)
+    private Long student1id;
+
+    @Column(name = "student2id", nullable = false)
+    private Long student2id;
+
+    @Column(name = "student3id", nullable = false)
+    private Long student3id;
+
+    @Column(name = "student4id", nullable = false)
+    private Long student4id;
+
+    @Column(name = "student5id")
+    private Long student5id;
 }
