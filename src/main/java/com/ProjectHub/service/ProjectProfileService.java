@@ -17,6 +17,7 @@ public class ProjectProfileService {
         Project project = projectRepository.findByProjectId(projectID);
 
         if(project!=null){
+            projectProfileModel.setProjectID(project.getProjectId());
             projectProfileModel.setProjectDomain(project.getProjectDomain());
             projectProfileModel.setProjectTitle(project.getProjectTitle());
             projectProfileModel.setDescription(project.getDescription());

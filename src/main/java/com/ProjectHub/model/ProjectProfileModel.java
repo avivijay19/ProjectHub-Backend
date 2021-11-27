@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectProfileModel {
+    private Long projectID;
     private String projectTitle;
     private String projectDomain;
     private String description;
