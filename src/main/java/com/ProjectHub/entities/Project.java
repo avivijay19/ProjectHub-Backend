@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * Created by Avinash Vijayvargiya on 22-09-2021.
@@ -72,4 +73,8 @@ public class Project {
 
     @Column(name = "student5id")
     private Long student5id;
+
+    // Date
+    @Column(name = "deadline")
+    private LocalDate deadline;
 }

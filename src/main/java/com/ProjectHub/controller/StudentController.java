@@ -81,4 +81,9 @@ public class StudentController {
     public ResponseEntity<StudentProfileModel> getStudentProfile(@RequestParam String username) {
         return ResponseEntity.ok(studentProfileService.getStudentProfileByUsername(username));
     }
+
+    @GetMapping("/studentOngoing")
+    public ResponseEntity<Long> getOngoingProjectID(@RequestParam String username) {
+        return ResponseEntity.ok(studentProfileService.getOngoingID(username));
+    }
 }
