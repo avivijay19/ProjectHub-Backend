@@ -51,8 +51,8 @@ public class Project {
     @Column(name = "paperUrl")
     private String paperUrl;
 
-    @Column(name = "approvedByTeacher")
-    private String approvedByTeacher;
+    @Column(name = "closed", columnDefinition = "varchar(255) default '0'")
+    private String closed;
 
     // Team and Guide
 

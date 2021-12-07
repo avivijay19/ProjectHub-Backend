@@ -1,6 +1,5 @@
 package com.ProjectHub.service;
 
-import com.ProjectHub.entities.Project;
 import com.ProjectHub.entities.StudentProfile;
 import com.ProjectHub.exceptions.ResourceNotFoundException;
 import com.ProjectHub.model.ProjectProfileModel;
@@ -30,7 +29,9 @@ public class StudentProfileService {
     @Autowired
     ProjectProfileService projectProfileService;
 
-    private Boolean isOngoing(LocalDate today, LocalDate deadline) {
+    private Boolean isOngoing(Long id) {
+        LocalDate deadline = projectRepository.findByProjectId(id).getDeadline();
+        LocalDate today = LocalDate.now(ZoneId.of("Asia/Kolkata"));
         return Period.between(today, deadline).getDays() >= 0;
     }
 
@@ -46,14 +47,30 @@ public class StudentProfileService {
 
         ArrayList<ProjectProfileModel> projects = new ArrayList<ProjectProfileModel>() {
             {
-                add(projectProfileService.getProjectCardDetails(studentProfile.getProject1id()));
-                add(projectProfileService.getProjectCardDetails(studentProfile.getProject2id()));
-                add(projectProfileService.getProjectCardDetails(studentProfile.getProject3id()));
-                add(projectProfileService.getProjectCardDetails(studentProfile.getProject4id()));
-                add(projectProfileService.getProjectCardDetails(studentProfile.getProject5id()));
-                add(projectProfileService.getProjectCardDetails(studentProfile.getProject6id()));
-                add(projectProfileService.getProjectCardDetails(studentProfile.getProject7id()));
-                add(projectProfileService.getProjectCardDetails(studentProfile.getProject8id()));
+                if (studentProfile.getProject1id() != null && !isOngoing(studentProfile.getProject1id()))
+                    add(projectProfileService.getProjectCardDetails(studentProfile.getProject1id()));
+                else add(null);
+                if (studentProfile.getProject2id() != null && !isOngoing(studentProfile.getProject2id()))
+                    add(projectProfileService.getProjectCardDetails(studentProfile.getProject2id()));
+                else add(null);
+                if (studentProfile.getProject3id() != null && !isOngoing(studentProfile.getProject3id()))
+                    add(projectProfileService.getProjectCardDetails(studentProfile.getProject3id()));
+                else add(null);
+                if (studentProfile.getProject4id() != null && !isOngoing(studentProfile.getProject4id()))
+                    add(projectProfileService.getProjectCardDetails(studentProfile.getProject4id()));
+                else add(null);
+                if (studentProfile.getProject5id() != null && !isOngoing(studentProfile.getProject5id()))
+                    add(projectProfileService.getProjectCardDetails(studentProfile.getProject5id()));
+                else add(null);
+                if (studentProfile.getProject6id() != null && !isOngoing(studentProfile.getProject6id()))
+                    add(projectProfileService.getProjectCardDetails(studentProfile.getProject6id()));
+                else add(null);
+                if (studentProfile.getProject7id() != null && !isOngoing(studentProfile.getProject7id()))
+                    add(projectProfileService.getProjectCardDetails(studentProfile.getProject7id()));
+                else add(null);
+                if (studentProfile.getProject8id() != null && !isOngoing(studentProfile.getProject8id()))
+                    add(projectProfileService.getProjectCardDetails(studentProfile.getProject8id()));
+                else add(null);
             }
         };
 
@@ -65,31 +82,31 @@ public class StudentProfileService {
         StudentProfile studentProfile = userRepository.findByUsername(username).
                 orElseThrow(() -> new ResourceNotFoundException("Student with id: " + username + " not found."));
 
-        ArrayList<Project> projects = new ArrayList<Project>() {
+        ArrayList<Long> projects = new ArrayList<Long>() {
             {
                 if (studentProfile.getProject1id() != null)
-                    add(projectRepository.findByProjectId(studentProfile.getProject1id()));
+                    add(studentProfile.getProject1id());
                 if (studentProfile.getProject2id() != null)
-                    add(projectRepository.findByProjectId(studentProfile.getProject2id()));
+                    add(studentProfile.getProject2id());
                 if (studentProfile.getProject3id() != null)
-                    add(projectRepository.findByProjectId(studentProfile.getProject3id()));
+                    add(studentProfile.getProject3id());
                 if (studentProfile.getProject4id() != null)
-                    add(projectRepository.findByProjectId(studentProfile.getProject4id()));
+                    add(studentProfile.getProject4id());
                 if (studentProfile.getProject5id() != null)
-                    add(projectRepository.findByProjectId(studentProfile.getProject5id()));
+                    add(studentProfile.getProject5id());
                 if (studentProfile.getProject6id() != null)
-                    add(projectRepository.findByProjectId(studentProfile.getProject6id()));
+                    add(studentProfile.getProject6id());
                 if (studentProfile.getProject7id() != null)
-                    add(projectRepository.findByProjectId(studentProfile.getProject7id()));
+                    add(studentProfile.getProject7id());
                 if (studentProfile.getProject8id() != null)
-                    add(projectRepository.findByProjectId(studentProfile.getProject8id()));
+                    add(studentProfile.getProject8id());
             }
         };
 
         LocalDate today = LocalDate.now(ZoneId.of("Asia/Kolkata"));
         for (int i = projects.size() - 1; i >= 0; i--) {
-            if (isOngoing(today, projects.get(i).getDeadline())) {
-                return projects.get(i).getProjectId();
+            if (isOngoing(projects.get(i))) {
+                return projects.get(i);
             }
         }
 
