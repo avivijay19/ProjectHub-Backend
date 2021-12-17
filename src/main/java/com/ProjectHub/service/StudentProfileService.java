@@ -43,6 +43,7 @@ public class StudentProfileService {
         studentProfileModel.setFirstName(studentProfile.getFirstName());
         studentProfileModel.setLastName(studentProfile.getLastName());
         studentProfileModel.setEmailId(studentProfile.getEmailId());
+        studentProfileModel.setPersonalEmail(studentProfile.getPersonalEmail());
         studentProfileModel.setDepartment(studentProfile.getDepartment());
 
         ArrayList<ProjectProfileModel> projects = new ArrayList<ProjectProfileModel>() {
