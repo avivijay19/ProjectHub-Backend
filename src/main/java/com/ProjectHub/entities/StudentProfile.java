@@ -40,6 +40,9 @@ public class StudentProfile implements Serializable {
     @Column(name = "emailId")
     private String emailId;
 
+    @Column(name = "personalEmail")
+    private String personalEmail;
+
     @Column(name = "roles")
     private String roles;
 

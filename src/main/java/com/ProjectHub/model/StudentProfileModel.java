@@ -1,6 +1,5 @@
 package com.ProjectHub.model;
 
-import com.ProjectHub.entities.Project;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,7 @@ public class StudentProfileModel {
     private String firstName;
     private String lastName;
     private String emailId;
+    private String personalEmail;
     private String department;
     ArrayList<ProjectProfileModel> projects;
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * Created by Avinash Vijayvargiya on 22-09-2021.
@@ -50,8 +51,11 @@ public class Project {
     @Column(name = "paperUrl")
     private String paperUrl;
 
-    @Column(name = "approvedByTeacher")
-    private String approvedByTeacher;
+    @Column(name = "closed", columnDefinition = "varchar(255) default '0'")
+    private String closed;
+
+    @Column(name = "projectInfo ")
+    private String projectInfo;
 
     // Team and Guide
 
@@ -72,4 +76,8 @@ public class Project {
 
     @Column(name = "student5id")
     private Long student5id;
+
+    // Date
+    @Column(name = "deadline")
+    private LocalDate deadline;
 }
