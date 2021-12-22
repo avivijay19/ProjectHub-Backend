@@ -51,11 +51,10 @@ public class Project {
     @Column(name = "paperUrl")
     private String paperUrl;
 
+
     @Column(name = "closed", columnDefinition = "varchar(255) default '0'")
     private String closed;
 
-    @Column(name = "projectInfo ")
-    private String projectInfo;
 
     // Team and Guide
 
@@ -76,6 +75,7 @@ public class Project {
 
     @Column(name = "student5id")
     private Long student5id;
+
 
     // Date
     @Column(name = "deadline")
