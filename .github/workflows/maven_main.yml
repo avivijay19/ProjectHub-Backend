@@ -1,0 +1,24 @@
+name: maven-main
+
+on:
+  push:
+    - main
+    
+
+jobs:
+  CI_Job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to Docker Hub - SIT
+        run: docker login -u ${{ secrets. DOCKER_USERNAME}} -p ${{ secrets.DOCKER_PASSWORD }} 
+      - name: Extract Git Tag
+        run: echo "GIT_TAG=SITHUB_REF/refs\/tags\//3" | sed -r 's/[/]+//g >> SGITHUB_ENV
+      - name: Build, Push Docker Image - SIT
+        env:
+          IMAGE TAG: ${{ env.GIT_TAG }}
+        run: |
+          docker build--file Dockerfiletag switchr/application_server:SIMAGE_TAG. 
+          docker push switchr/application_server:SIMAGE_TAG
+          docker build - -file Dockerfile--tag switchr/application_server:sit_latest. 
+          docker push switchr/application_server: sit_latest
