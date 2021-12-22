@@ -18,7 +18,7 @@ jobs:
         env:
           IMAGE TAG: ${{ env.GIT_TAG }}
         run: |
-          docker build--file Dockerfiletag switchr/application_server:SIMAGE_TAG. 
+          docker build--file Dockerfiletag avinash14022002/projecthub:SIMAGE_TAG. 
           docker push switchr/application_server:SIMAGE_TAG
-          docker build - -file Dockerfile--tag switchr/application_server:sit_latest. 
+          docker build - -file Dockerfile--tag avinash14022002/projecthub:sit_latest. 
           docker push switchr/application_server: sit_latest
