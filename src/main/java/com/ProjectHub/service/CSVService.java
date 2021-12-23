@@ -1,8 +1,8 @@
 package com.ProjectHub.service;
 
 import com.ProjectHub.CSVHelper;
-import com.ProjectHub.entities.DeveloperTutorial;
-import com.ProjectHub.repository.DeveloperTutorialRepository;
+import com.ProjectHub.entities.StudentProfile;
+import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public class CSVService {
     @Autowired
-    DeveloperTutorialRepository repository;
+    UserRepository repository;
 
     public void save(MultipartFile file) {
         try {
-            List<DeveloperTutorial> tutorials = CSVHelper.csvToTutorials(file.getInputStream());
+            List<StudentProfile> tutorials = CSVHelper.csvToTutorials(file.getInputStream());
             repository.saveAll(tutorials);
         } catch (IOException e) {
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
@@ -26,13 +26,12 @@ public class CSVService {
     }
 
     public ByteArrayInputStream load() {
-        List<DeveloperTutorial> tutorials = repository.findAll();
+        List<StudentProfile> tutorials = repository.findAll();
 
-        ByteArrayInputStream in = CSVHelper.tutorialsToCSV(tutorials);
-        return in;
+        return CSVHelper.tutorialsToCSV(tutorials);
     }
 
-    public List<DeveloperTutorial> getAllTutorials() {
+    public List<StudentProfile> getAllTutorials() {
         return repository.findAll();
     }
 }

@@ -1,7 +1,7 @@
 package com.ProjectHub.controller;
 
 import com.ProjectHub.CSVHelper;
-import com.ProjectHub.entities.DeveloperTutorial;
+import com.ProjectHub.entities.StudentProfile;
 import com.ProjectHub.model.ResponseMessage;
 import com.ProjectHub.service.CSVService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +55,9 @@ public class CSVController {
     }
 
     @GetMapping("/tutorials")
-    public ResponseEntity<List<DeveloperTutorial>> getAllTutorials() {
+    public ResponseEntity<List<StudentProfile>> getAllTutorials() {
         try {
-            List<DeveloperTutorial> tutorials = fileService.getAllTutorials();
+            List<StudentProfile> tutorials = fileService.getAllTutorials();
 
             if (tutorials.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

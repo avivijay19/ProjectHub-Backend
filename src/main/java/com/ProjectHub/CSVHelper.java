@@ -1,6 +1,6 @@
 package com.ProjectHub;
 
-import com.ProjectHub.entities.DeveloperTutorial;
+import com.ProjectHub.entities.StudentProfile;
 import org.apache.commons.csv.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,24 +21,25 @@ public class CSVHelper {
                 || Objects.equals(file.getContentType(), "application/vnd.ms-excel");
     }
 
-    public static List<DeveloperTutorial> csvToTutorials(InputStream is) {
+    public static List<StudentProfile> csvToTutorials(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
              CSVParser csvParser = new CSVParser(fileReader,
-                     CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
+                     CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
 
-            List<DeveloperTutorial> developerTutorialList = new ArrayList<>();
+            List<StudentProfile> developerTutorialList = new ArrayList<>();
 
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
             for (CSVRecord csvRecord : csvRecords) {
-                DeveloperTutorial developerTutorial = new DeveloperTutorial(
+                StudentProfile developerTutorial = new StudentProfile(
                         csvRecord.get("username"),
                         csvRecord.get("password"),
                         csvRecord.get("firstname"),
                         csvRecord.get("lastname"),
                         csvRecord.get("department"),
                         csvRecord.get("emailId"),
-                        csvRecord.get("personalEmail")
+                        csvRecord.get("personalEmail"),
+                        csvRecord.get("Roles")
                 );
 
                 developerTutorialList.add(developerTutorial);
@@ -50,12 +51,12 @@ public class CSVHelper {
         }
     }
 
-    public static ByteArrayInputStream tutorialsToCSV(List<DeveloperTutorial> developerTutorialList) {
+    public static ByteArrayInputStream tutorialsToCSV(List<StudentProfile> developerTutorialList) {
         final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
-             CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
-            for (DeveloperTutorial developerTutorial : developerTutorialList) {
+             CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format)) {
+            for (StudentProfile developerTutorial : developerTutorialList) {
                 List<String> data = Arrays.asList(
                         developerTutorial.getUsername(),
                         developerTutorial.getPassword(),
@@ -63,7 +64,8 @@ public class CSVHelper {
                         developerTutorial.getLastName(),
                         developerTutorial.getDepartment(),
                         developerTutorial.getEmailId(),
-                        developerTutorial.getPersonalEmail()
+                        developerTutorial.getPersonalEmail(),
+                        developerTutorial.getRoles()
                 );
 
                 csvPrinter.printRecord(data);

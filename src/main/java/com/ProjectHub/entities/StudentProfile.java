@@ -21,6 +21,7 @@ import java.io.Serializable;
 public class StudentProfile implements Serializable {
 
     private static final long serialVersionUID = 2364534L;
+
     @Id
     @Column(name = "username")
     private String username;
@@ -85,6 +86,17 @@ public class StudentProfile implements Serializable {
     }
 //
 //    public String getRoles() {
+
+    public StudentProfile(String username, String password, String firstName, String lastName, String department, String emailId, String personalEmail, String roles) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.department = department;
+        this.emailId = emailId;
+        this.personalEmail = personalEmail;
+        this.roles = roles;
+    }
 //        return roles;
 //    }
 //    public String getFirstName() {
@@ -102,5 +114,7 @@ public class StudentProfile implements Serializable {
 //    public void setLastName(String lastName) {
 //        this.lastName = lastName;
 //    }
+
+
 }
 
