@@ -32,7 +32,7 @@ public class ProjectDetails {
 
     private String closed;
 
-    private String projectInfo;
+    private Map<String, String> projectInfo;
 
     // Team and Guide
 

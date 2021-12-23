@@ -62,6 +62,7 @@ public class ProjectProfileService {
 
     public ProjectDetails getProjectDetails(Long id) {
         Project project = projectRepository.findByProjectId(id);
+
         String guideName = "HardCodedName";
 
         Map<String, String> guideMap = new HashMap<String, String>();
@@ -78,6 +79,11 @@ public class ProjectProfileService {
         map.put("id", null);
         map.put("name", null);
 
+        String[] tokens = project.getProjectInfo().split("#");
+        Map<String, String> projectInfo = new HashMap<String, String>();
+        projectInfo.put("yearInfo", "EDAI " + tokens[0] + " " + tokens[1]);
+        projectInfo.put("groupInfo", tokens[2]);
+
         ProjectDetails projectDetails = new ProjectDetails(id,
                 project.getProjectTitle(),
                 project.getProjectDomain(),
@@ -85,7 +91,7 @@ public class ProjectProfileService {
                 project.getProjectTag1(), project.getProjectTag2(), project.getProjectTag3(),
                 project.getImageUrl(), project.getPptUrl(), project.getPaperUrl(),
                 project.getClosed(),
-                project.getProjectInfo(),
+                projectInfo,
                 guideMap,
                 mapStudentDetails(student1),
                 mapStudentDetails(student2),
