@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.Map;
 
+/*
+This project model is for displaying all project details, including names of the guide and students working on it
+*/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +28,6 @@ public class ProjectDetails {
     private Map<String, String> projectInfo;
 
     // Team and Guide
-
     private Map<String, String> guide;
 
     private Map<String, String> student1;
