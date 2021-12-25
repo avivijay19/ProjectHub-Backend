@@ -2,8 +2,10 @@ package com.ProjectHub.controller;
 
 import com.ProjectHub.entities.Project;
 import com.ProjectHub.model.ProjectDetails;
+import com.ProjectHub.model.TeacherProfileModel;
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.service.ProjectProfileService;
+import com.ProjectHub.service.TeacherProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,9 @@ public class TeacherController {
 
     @Autowired
     ProjectProfileService projectProfileService;
+
+    @Autowired
+    TeacherProfileService teacherProfileService;
 
     /**
      * the endpoint is used get all the projects in list view and detailed project view with project id
@@ -56,6 +61,16 @@ public class TeacherController {
         try {
             ProjectDetails project = projectProfileService.getProjectDetails(projectID);
             return new ResponseEntity<>(project, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/teacherProfile/{employeeID}")
+    public ResponseEntity<TeacherProfileModel> getTeacherProfile(@PathVariable String employeeID) {
+        try {
+            TeacherProfileModel teacher = teacherProfileService.getTeacherProfileByUsername(employeeID);
+            return new ResponseEntity<>(teacher, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
