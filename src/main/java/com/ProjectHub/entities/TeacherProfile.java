@@ -35,4 +35,7 @@ public class TeacherProfile {
 
     @Column(name = "emailId")
     private String emailId;
+
+    @Column(name = "roles")
+    private String roles;
 }
