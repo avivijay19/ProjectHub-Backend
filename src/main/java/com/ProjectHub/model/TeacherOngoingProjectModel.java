@@ -23,7 +23,7 @@ public class TeacherOngoingProjectModel {
         setProjectId(project.getProjectId());
         setProjectTitle(project.getProjectTitle());
         String[] tokens = project.getProjectInfo().split("#");
-        projectInfo.put("yearInfo", "EDAI " + tokens[0] + " " + tokens[1]);
+        projectInfo.put("yearInfo", tokens[0] + " " + tokens[1]);
         projectInfo.put("groupInfo", tokens[2]);
     }
 }
