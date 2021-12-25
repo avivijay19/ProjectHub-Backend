@@ -54,7 +54,7 @@ public class Project {
     @Column(name = "closed", columnDefinition = "varchar(255) default '0'")
     private String closed;
 
-    @Column(name = "projectInfo ")
+    @Column(name = "projectInfo")
     private String projectInfo;
 
     // Team and Guide

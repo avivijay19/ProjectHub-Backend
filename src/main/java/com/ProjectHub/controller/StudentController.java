@@ -1,6 +1,7 @@
 package com.ProjectHub.controller;
 
 import com.ProjectHub.entities.Project;
+import com.ProjectHub.model.ProjectDetails;
 import com.ProjectHub.model.ProjectSubmissionModel;
 import com.ProjectHub.model.StudentProfileModel;
 import com.ProjectHub.repository.ProjectRepository;
@@ -85,5 +86,15 @@ public class StudentController {
     @GetMapping("/studentOngoing")
     public ResponseEntity<Long> getOngoingProjectID(@RequestParam String username) {
         return ResponseEntity.ok(studentProfileService.getOngoingID(username));
+    }
+
+    @GetMapping("/projectDetails/{projectID}")
+    public ResponseEntity<ProjectDetails> getProjectDetails(@PathVariable Long projectID) {
+        try {
+            ProjectDetails project = projectProfileService.getProjectDetails(projectID);
+            return new ResponseEntity<>(project, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 }
