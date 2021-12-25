@@ -13,25 +13,15 @@ import java.util.Map;
 public class ProjectDetails {
     private long projectId;
     private String projectTitle;
-
     private String projectDomain;
-
     private String description;
-
     private String projectTag1;
-
     private String projectTag2;
-
     private String projectTag3;
-
     private String imageUrl;
-
     private String pptUrl;
-
     private String paperUrl;
-
     private String closed;
-
     private Map<String, String> projectInfo;
 
     // Team and Guide
