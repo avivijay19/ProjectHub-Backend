@@ -2,10 +2,12 @@ package com.ProjectHub.service;
 
 import com.ProjectHub.entities.Project;
 import com.ProjectHub.entities.StudentProfile;
+import com.ProjectHub.entities.TeacherProfile;
 import com.ProjectHub.model.ProjectDetails;
 import com.ProjectHub.model.ProjectProfileModel;
 import com.ProjectHub.model.ProjectSubmissionModel;
 import com.ProjectHub.repository.ProjectRepository;
+import com.ProjectHub.repository.TeacherRepository;
 import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class ProjectProfileService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TeacherRepository teacherRepository;
 
     ProjectProfileModel getProjectCardDetails(Long projectID) {
         ProjectProfileModel projectProfileModel = new ProjectProfileModel();
@@ -63,7 +68,8 @@ public class ProjectProfileService {
     public ProjectDetails getProjectDetails(Long id) {
         Project project = projectRepository.findByProjectId(id);
 
-        String guideName = "HardCodedName";
+        TeacherProfile guide = teacherRepository.findById(String.valueOf(project.getGuideID())).get();
+        String guideName = guide.getFirstName() + " " + guide.getLastName();
 
         Map<String, String> guideMap = new HashMap<String, String>();
         guideMap.put("id", String.valueOf(project.getGuideID()));
