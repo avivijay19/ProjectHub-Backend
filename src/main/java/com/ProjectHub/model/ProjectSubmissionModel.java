@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*
+This project model is for project submission page
+*/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
