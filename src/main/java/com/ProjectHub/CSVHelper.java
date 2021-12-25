@@ -60,7 +60,8 @@ public class CSVHelper {
                         csvRecord.get("firstName"),
                         csvRecord.get("lastName"),
                         csvRecord.get("department"),
-                        csvRecord.get("emailId")
+                        csvRecord.get("emailId"),
+                        csvRecord.get("roles")
                 );
                 teacherProfiles.add(teacherProfile);
             }
@@ -107,7 +108,8 @@ public class CSVHelper {
                         teacherProfile.getFirstName(),
                         teacherProfile.getLastName(),
                         teacherProfile.getDepartment(),
-                        teacherProfile.getEmailId()
+                        teacherProfile.getEmailId(),
+                        teacherProfile.getRoles()
                 );
                 csvPrinter.printRecord(data);
             }
