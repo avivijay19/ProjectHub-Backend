@@ -1,27 +1,26 @@
 package com.ProjectHub.controller;
 
 import com.ProjectHub.entities.Project;
-import com.ProjectHub.model.NewProjectModel;
-import com.ProjectHub.model.ProjectDetails;
-import com.ProjectHub.model.TeacherOngoingProjectModel;
-import com.ProjectHub.model.TeacherProfileModel;
+import com.ProjectHub.model.*;
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.service.ProjectProfileService;
 import com.ProjectHub.service.TeacherProfileService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.ProjectHub.util.Constants.BEARER_AUTH;
 
 /**
  * Created by Avinash Vijayvargiya on 10-10-2021.
  */
 @RestController
-//@SecurityRequirement(name = BEARER_AUTH)
+@SecurityRequirement(name = BEARER_AUTH)
 @RequestMapping("/api")
 public class TeacherController {
 
@@ -100,12 +99,12 @@ public class TeacherController {
         }
     }
 
-    @PutMapping("/updateDeadline/{projectID}")
-    public ResponseEntity<HttpStatus> updateDeadline(@RequestParam LocalDate newDeadline, @PathVariable Long projectID) {
+    @PutMapping("/updateDeadline")
+    public ResponseEntity<HttpStatus> updateDeadline(@RequestBody ProjectDeadlineModel projectDeadlineModel) {
         System.out.println("inside updateDeadline");
-        System.out.println(newDeadline + " - " + projectID);
+        System.out.println(projectDeadlineModel);
         try {
-            projectProfileService.updateDeadline(projectID, newDeadline);
+            projectProfileService.updateDeadline(projectDeadlineModel);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e);
