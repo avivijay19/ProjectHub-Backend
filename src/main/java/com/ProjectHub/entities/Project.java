@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-//@DynamicUpdate
 @Table(name = "project")
 public class Project {
 
