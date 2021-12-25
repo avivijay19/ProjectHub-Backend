@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
  * Created by Avinash Vijayvargiya on 10-10-2021.
  */
 @RestController
+//@SecurityRequirement(name = BEARER_AUTH)
 @RequestMapping("/api")
 public class TeacherController {
 
@@ -97,4 +99,29 @@ public class TeacherController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping("/updateDeadline/{projectID}")
+    public ResponseEntity<HttpStatus> updateDeadline(@RequestParam LocalDate newDeadline, @PathVariable Long projectID) {
+        System.out.println("inside updateDeadline");
+        System.out.println(newDeadline + " - " + projectID);
+        try {
+            projectProfileService.updateDeadline(projectID, newDeadline);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("we are in exception");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/closeProject/{projectID}")
+    public ResponseEntity<HttpStatus> closeProject(@PathVariable Long projectID) {
+        try {
+            projectProfileService.closeProject(projectID);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

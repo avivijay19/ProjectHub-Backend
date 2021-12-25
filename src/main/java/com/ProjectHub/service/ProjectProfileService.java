@@ -10,6 +10,7 @@ import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,4 +138,21 @@ public class ProjectProfileService {
         /*long pk = project.getProjectId();
         System.out.println("Auto generated key: " + pk);*/
     }
+
+    public void updateDeadline(Long projectID, LocalDate newDeadline) {
+        System.out.println(newDeadline);
+        Project project = projectRepository.findByProjectId(projectID);
+        project.setDeadline(newDeadline);
+        System.out.println(project);
+        projectRepository.save(project);
+    }
+
+    public void closeProject(Long projectID) {
+        Project project = projectRepository.findByProjectId(projectID);
+        project.setClosed("1");
+        projectRepository.save(project);
+    }
+
+//    public void updateDeadline(Long projectID, String date){}
+
 }
