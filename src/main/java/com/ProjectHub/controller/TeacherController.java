@@ -2,6 +2,7 @@ package com.ProjectHub.controller;
 
 import com.ProjectHub.entities.Project;
 import com.ProjectHub.model.ProjectDetails;
+import com.ProjectHub.model.TeacherOngoingProjectModel;
 import com.ProjectHub.model.TeacherProfileModel;
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.service.ProjectProfileService;
@@ -71,6 +72,16 @@ public class TeacherController {
         try {
             TeacherProfileModel teacher = teacherProfileService.getTeacherProfileByUsername(employeeID);
             return new ResponseEntity<>(teacher, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/teacherOngoing/{employeeID}")
+    public ResponseEntity<List<TeacherOngoingProjectModel>> getTeacherOngoing(@PathVariable String employeeID) {
+        try {
+            List<TeacherOngoingProjectModel> teacherOngoing = projectProfileService.getTeacherOngoingCardDetails(employeeID);
+            return new ResponseEntity<>(teacherOngoing, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }

@@ -6,13 +6,16 @@ import com.ProjectHub.entities.TeacherProfile;
 import com.ProjectHub.model.ProjectDetails;
 import com.ProjectHub.model.ProjectProfileModel;
 import com.ProjectHub.model.ProjectSubmissionModel;
+import com.ProjectHub.model.TeacherOngoingProjectModel;
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.repository.TeacherRepository;
 import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -107,5 +110,16 @@ public class ProjectProfileService {
                 project.getDeadline()
         );
         return projectDetails;
+    }
+
+    public List<TeacherOngoingProjectModel> getTeacherOngoingCardDetails(String teacherID) {
+        List<Project> projectList = projectRepository.findAllByTeacherId(Long.valueOf(teacherID), "0");
+
+        List<TeacherOngoingProjectModel> teacherOngoingProjectModelList = new ArrayList<>();
+        for (int i = 0; i < projectList.size(); i++) {
+            teacherOngoingProjectModelList.add(new TeacherOngoingProjectModel(projectList.get(i)));
+        }
+
+        return teacherOngoingProjectModelList;
     }
 }
