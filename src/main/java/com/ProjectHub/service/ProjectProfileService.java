@@ -3,10 +3,7 @@ package com.ProjectHub.service;
 import com.ProjectHub.entities.Project;
 import com.ProjectHub.entities.StudentProfile;
 import com.ProjectHub.entities.TeacherProfile;
-import com.ProjectHub.model.ProjectDetails;
-import com.ProjectHub.model.ProjectProfileModel;
-import com.ProjectHub.model.ProjectSubmissionModel;
-import com.ProjectHub.model.TeacherOngoingProjectModel;
+import com.ProjectHub.model.*;
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.repository.TeacherRepository;
 import com.ProjectHub.repository.UserRepository;
@@ -116,10 +113,28 @@ public class ProjectProfileService {
         List<Project> projectList = projectRepository.findAllByTeacherId(Long.valueOf(teacherID), "0");
 
         List<TeacherOngoingProjectModel> teacherOngoingProjectModelList = new ArrayList<>();
-        for (int i = 0; i < projectList.size(); i++) {
-            teacherOngoingProjectModelList.add(new TeacherOngoingProjectModel(projectList.get(i)));
+        for (Project project : projectList) {
+            teacherOngoingProjectModelList.add(new TeacherOngoingProjectModel(project));
         }
 
         return teacherOngoingProjectModelList;
+    }
+
+    public void insertProject(NewProjectModel newProjectModel) {
+        Project project = new Project();
+
+        project.setProjectInfo(newProjectModel.getProjectInfo());
+        project.setGuideID(newProjectModel.getGuideID());
+        project.setStudent1id(newProjectModel.getStudent1ID());
+        project.setStudent2id(newProjectModel.getStudent2ID());
+        project.setStudent3id(newProjectModel.getStudent3ID());
+        project.setStudent4id(newProjectModel.getStudent4ID());
+        project.setStudent5id(newProjectModel.getStudent5ID());
+        project.setDeadline(newProjectModel.getDeadline());
+
+        projectRepository.save(project);
+
+        /*long pk = project.getProjectId();
+        System.out.println("Auto generated key: " + pk);*/
     }
 }

@@ -1,6 +1,7 @@
 package com.ProjectHub.controller;
 
 import com.ProjectHub.entities.Project;
+import com.ProjectHub.model.NewProjectModel;
 import com.ProjectHub.model.ProjectDetails;
 import com.ProjectHub.model.TeacherOngoingProjectModel;
 import com.ProjectHub.model.TeacherProfileModel;
@@ -84,6 +85,16 @@ public class TeacherController {
             return new ResponseEntity<>(teacherOngoing, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/addNewProject")
+    public ResponseEntity<HttpStatus> addNewProject(@RequestBody NewProjectModel newProjectModel) {
+        try {
+            projectProfileService.insertProject(newProjectModel);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
