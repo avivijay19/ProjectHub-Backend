@@ -2,6 +2,8 @@ package com.ProjectHub.service;
 
 import com.ProjectHub.CSVHelper;
 import com.ProjectHub.entities.StudentProfile;
+import com.ProjectHub.entities.TeacherProfile;
+import com.ProjectHub.repository.TeacherRepository;
 import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,22 +18,44 @@ public class CSVService {
     @Autowired
     UserRepository repository;
 
-    public void save(MultipartFile file) {
+    @Autowired
+    TeacherRepository teacherRepository;
+
+    public void saveStudent(MultipartFile file) {
         try {
-            List<StudentProfile> tutorials = CSVHelper.csvToTutorials(file.getInputStream());
-            repository.saveAll(tutorials);
+            List<StudentProfile> studentProfiles = CSVHelper.CSVToStudent(file.getInputStream());
+            repository.saveAll(studentProfiles);
         } catch (IOException e) {
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
     }
 
-    public ByteArrayInputStream load() {
-        List<StudentProfile> tutorials = repository.findAll();
-
-        return CSVHelper.tutorialsToCSV(tutorials);
+    public void saveTeacher(MultipartFile file) {
+        try {
+            List<TeacherProfile> teacherProfiles = CSVHelper.CSVToTeacher(file.getInputStream());
+            teacherRepository.saveAll(teacherProfiles);
+        } catch (IOException e) {
+            throw new RuntimeException("fail to store csv data: " + e.getMessage());
+        }
     }
 
-    public List<StudentProfile> getAllTutorials() {
+    public ByteArrayInputStream loadStudent() {
+        List<StudentProfile> studentProfiles = repository.findAll();
+
+        return CSVHelper.studentToCSV(studentProfiles);
+    }
+
+    public ByteArrayInputStream loadTeacher() {
+        List<TeacherProfile> teacherProfiles = teacherRepository.findAll();
+
+        return CSVHelper.teacherToCSV(teacherProfiles);
+    }
+
+    public List<StudentProfile> getAllStudents() {
         return repository.findAll();
+    }
+
+    public List<TeacherProfile> getAllTeacher() {
+        return teacherRepository.findAll();
     }
 }
