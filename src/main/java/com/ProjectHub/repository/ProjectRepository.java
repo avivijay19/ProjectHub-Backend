@@ -16,6 +16,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     Project findByProjectId(Long id);
 
+
     @Query(value = "SELECT * FROM project p WHERE p.guideid =:teacherId AND p.closed =:status ORDER BY p.project_id", nativeQuery = true)
     List<Project> findAllByTeacherId(@Param("teacherId") Long teacherId, @Param("status") String status);
 //    @Modifying
