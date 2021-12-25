@@ -137,4 +137,17 @@ public class ProjectProfileService {
         /*long pk = project.getProjectId();
         System.out.println("Auto generated key: " + pk);*/
     }
+
+    public void updateDeadline(ProjectDeadlineModel projectDeadlineModel) {
+        Project project = projectRepository.findByProjectId(projectDeadlineModel.getProjectID());
+        project.setDeadline(projectDeadlineModel.getDeadline());
+        projectRepository.save(project);
+    }
+
+    public void closeProject(Long projectID) {
+        Project project = projectRepository.findByProjectId(projectID);
+        project.setClosed("1");
+        projectRepository.save(project);
+    }
+
 }
