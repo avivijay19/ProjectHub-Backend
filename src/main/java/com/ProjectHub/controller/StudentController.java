@@ -81,9 +81,9 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/studentProfileDetails")
-    public ResponseEntity<StudentProfileModel> getStudentProfile(@RequestParam String username) {
-        return ResponseEntity.ok(studentProfileService.getStudentProfileByUsername(username));
+    @GetMapping("/studentProfileDetails/{studentID}")
+    public ResponseEntity<StudentProfileModel> getStudentProfile(@PathVariable String studentID) {
+        return ResponseEntity.ok(studentProfileService.getStudentProfileByUsername(studentID));
     }
 
     @GetMapping("/studentOngoing")
