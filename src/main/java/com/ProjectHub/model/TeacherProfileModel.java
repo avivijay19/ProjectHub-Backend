@@ -16,7 +16,7 @@ public class TeacherProfileModel {
     private String lastName;
     private String department;
     private String emailId;
-    private List<ProjectProfileModel> closedProjects;
+    private List<ProjectProfileModel> projects;
 
     public TeacherProfileModel(TeacherProfile teacherProfile, List<ProjectProfileModel> projectProfileModel) {
         setEmployeeID(teacherProfile.getEmployeeID());
@@ -24,6 +24,6 @@ public class TeacherProfileModel {
         setLastName(teacherProfile.getLastName());
         setDepartment(teacherProfile.getDepartment());
         setEmailId(teacherProfile.getEmailId());
-        setClosedProjects(projectProfileModel);
+        setProjects(projectProfileModel);
     }
 }
