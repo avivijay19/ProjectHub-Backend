@@ -81,10 +81,6 @@ public class ProjectProfileService {
         StudentProfile student4 = userRepository.findByUsername(String.valueOf(project.getStudent4id())).get();
         StudentProfile student5 = project.getStudent5id() != null ? userRepository.findByUsername(String.valueOf(project.getStudent5id())).get() : null;
 
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("id", null);
-        map.put("name", null);
-
         String[] tokens = project.getProjectInfo().split("#");
         Map<String, String> projectInfo = new HashMap<String, String>();
         projectInfo.put("yearInfo", "EDAI " + tokens[0] + " " + tokens[1]);
@@ -103,7 +99,7 @@ public class ProjectProfileService {
                 mapStudentDetails(student2),
                 mapStudentDetails(student3),
                 mapStudentDetails(student4),
-                student5 == null ? map : mapStudentDetails(student5),
+                student5 == null ? null : mapStudentDetails(student5),
                 project.getDeadline()
         );
         return projectDetails;
