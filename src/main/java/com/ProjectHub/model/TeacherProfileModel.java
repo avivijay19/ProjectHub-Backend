@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeacherProfileModel {
-    private String employeeID;
+    private String employeeId;
     private String firstName;
     private String lastName;
     private String department;
@@ -19,7 +19,7 @@ public class TeacherProfileModel {
     private List<ProjectProfileModel> projects;
 
     public TeacherProfileModel(TeacherProfile teacherProfile, List<ProjectProfileModel> projectProfileModel) {
-        setEmployeeID(teacherProfile.getEmployeeID());
+        setEmployeeId(teacherProfile.getEmployeeID());
         setFirstName(teacherProfile.getFirstName());
         setLastName(teacherProfile.getLastName());
         setDepartment(teacherProfile.getDepartment());
