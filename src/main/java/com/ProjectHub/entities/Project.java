@@ -50,8 +50,8 @@ public class Project {
     @Column(name = "paperUrl")
     private String paperUrl;
 
-    @Column(name = "closed", columnDefinition = "varchar(255) default '0'")
-    private String closed;
+    @Column(name = "closed")
+    private String closed = "0";
 
     @Column(name = "projectInfo")
     private String projectInfo;
