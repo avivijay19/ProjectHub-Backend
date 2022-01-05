@@ -1,6 +1,9 @@
 package com.ProjectHub.model;
 
 import com.ProjectHub.entities.StudentProfile;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,11 +16,16 @@ import java.util.stream.Collectors;
 /**
  * Created by Avinash Vijayvargiya on 30-09-2021.
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MyUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 275347623L;
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
     private boolean active;
     private List<GrantedAuthority> authorities;
 
