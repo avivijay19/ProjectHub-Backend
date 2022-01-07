@@ -15,9 +15,6 @@ spring:
     #     username: postgres
     #     password: root
 
-
-
-
     #maximum pool size #https://stackoverflow.com/a/68270053
     hikari.max-pool-size: 15
 
