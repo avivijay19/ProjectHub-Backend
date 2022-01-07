@@ -1,19 +1,20 @@
 spring:
   datasource:
-#    url: jdbc:postgresql://ec2-3-211-240-42.compute-1.amazonaws.com:5432/d3ic0h2elet5hv?sslmode=require
-#    username: elvocvggsxrisf
-#    password: 75287404f7006d71e17cf6b3a2e9abedf9aa29c91cc2746921dd8776569ace52
-    #    url: jdbc:mysql://db4free.net:3306/projecthub
-    #    username: projecthub
-    #    password: projecthub
+       url: jdbc:postgresql://ec2-3-211-240-42.compute-1.amazonaws.com:5432/d3ic0h2elet5hv?sslmode=require
+       username: elvocvggsxrisf
+       password: 75287404f7006d71e17cf6b3a2e9abedf9aa29c91cc2746921dd8776569ace52
+#        url: jdbc:mysql://db4free.net:3306/projecthub
+#        username: projecthub
+#        password: projecthub
 
     #    url: jdbc:postgresql://${RDS_HOST}:${RDS_PORT}/${RDS_DB_NAME}?sslmode=require
     #    username: ${RDS_USERNAME}
     #    password: ${RDS_PASSWORD}
 
-    url: jdbc:postgresql://localhost:5432/projectHub
-    username: postgres
-    password: root
+#     url: jdbc:postgresql://localhost:5432/projectHub
+#     username: postgres
+#     password: root
+
 
 
 
