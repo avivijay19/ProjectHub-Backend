@@ -2,7 +2,9 @@ package com.ProjectHub.controller;
 
 import com.ProjectHub.model.AuthenticationRequest;
 import com.ProjectHub.model.AuthenticationResponse;
+import com.ProjectHub.model.ChangePasswordModel;
 import com.ProjectHub.model.MyUserDetails;
+import com.ProjectHub.service.AuthService;
 import com.ProjectHub.service.JPAUserDetailsService;
 import com.ProjectHub.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class AuthenticationController {
 
     @Autowired
     private JPAUserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthService authService;
 
     @PostMapping(value = "/studentLogin")
     //@CrossOrigin
@@ -100,5 +105,16 @@ public class AuthenticationController {
 
         return new ResponseEntity<>(response, responseHeaders, HttpStatus.OK);
 
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<HttpStatus> changePassword(@RequestBody ChangePasswordModel changePasswordModel) {
+        try {
+            boolean status = authService.changePassword(changePasswordModel);
+            if (status) return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
