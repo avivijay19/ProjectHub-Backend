@@ -110,8 +110,9 @@ public class AuthenticationController {
     @PostMapping("/changePassword")
     public ResponseEntity<HttpStatus> changePassword(@RequestBody ChangePasswordModel changePasswordModel) {
         try {
-            authService.changePassword(changePasswordModel);
-            return new ResponseEntity<>(HttpStatus.OK);
+            boolean status = authService.changePassword(changePasswordModel);
+            if (status) return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

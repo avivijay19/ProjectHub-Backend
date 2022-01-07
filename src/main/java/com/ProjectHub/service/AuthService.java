@@ -18,23 +18,32 @@ public class AuthService {
     @Autowired
     TeacherRepository teacherRepository;
 
-    private void updateStudentPassword(String studentId, String newPassword) {
+    private boolean updateStudentPassword(String studentId, String newPassword, String oldPassword) {
         StudentProfile studentProfile = userRepository.findByUsername(studentId).get();
-        studentProfile.setPassword(newPassword);
-        userRepository.save(studentProfile);
-    }
-
-    private void updateTeacherPassword(String teacherId, String newPassword) {
-        TeacherProfile teacherProfile = teacherRepository.findById(teacherId).get();
-        teacherProfile.setPassword(newPassword);
-        teacherRepository.save(teacherProfile);
-    }
-
-    public void changePassword(ChangePasswordModel changePasswordModel) {
-        if (Objects.equals(changePasswordModel.getUserType(), "student")) {
-            updateStudentPassword(changePasswordModel.getId(), changePasswordModel.getNewPassword());
-        } else if (Objects.equals(changePasswordModel.getUserType(), "teacher")) {
-            updateTeacherPassword(changePasswordModel.getId(), changePasswordModel.getNewPassword());
+        if (Objects.equals(studentProfile.getPassword(), oldPassword)) {
+            studentProfile.setPassword(newPassword);
+            userRepository.save(studentProfile);
+            return true;
         }
+        return false;
+    }
+
+    private boolean updateTeacherPassword(String teacherId, String newPassword, String oldPassword) {
+        TeacherProfile teacherProfile = teacherRepository.findById(teacherId).get();
+        if (Objects.equals(teacherProfile.getPassword(), oldPassword)) {
+            teacherProfile.setPassword(newPassword);
+            teacherRepository.save(teacherProfile);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean changePassword(ChangePasswordModel model) {
+        if (Objects.equals(model.getUserType(), "student")) {
+            return updateStudentPassword(model.getId(), model.getNewPassword(), model.getOldPassword());
+        } else if (Objects.equals(model.getUserType(), "teacher")) {
+            return updateTeacherPassword(model.getId(), model.getNewPassword(), model.getOldPassword());
+        }
+        return false;
     }
 }

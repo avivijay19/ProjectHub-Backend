@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class ChangePasswordModel {
     String userType;
     String id;
+    String oldPassword;
     String newPassword;
 }
