@@ -12,6 +12,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,27 @@ public class AuthenticationController {
 
     @Autowired
     private AuthService authService;
+
+    @PostMapping(value = "/studentLogin")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        try {
+            HttpHeaders responseHeaders = new HttpHeaders();
+
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+            final MyUserDetails userDetails = (MyUserDetails) userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            final String jwt = jwtTokenUtil.generateToken(userDetails);
+            AuthenticationResponse response = new AuthenticationResponse(jwt);
+
+            response.setUsername(userDetails.getUsername());
+            List<String> roles = new ArrayList<>();
+            userDetails.getAuthorities().forEach((a) -> roles.add(a.getAuthority()));
+            response.setRoles(roles);
+
+            return new ResponseEntity<>(response, responseHeaders, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 
     @PostMapping(value = "/teacherLogin")
     public ResponseEntity<?> createAuthenticationTokenTeacher(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
