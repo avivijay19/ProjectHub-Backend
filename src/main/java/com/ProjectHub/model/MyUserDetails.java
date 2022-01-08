@@ -1,5 +1,6 @@
 package com.ProjectHub.model;
 
+import com.ProjectHub.entities.AdminProfile;
 import com.ProjectHub.entities.StudentProfile;
 import com.ProjectHub.entities.TeacherProfile;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,15 @@ public class MyUserDetails implements UserDetails {
         this.password = teacherProfile.getFirstName();
         this.active = teacherProfile.isActive();
         this.authorities = Arrays.stream(teacherProfile.getRoles().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
+
+    public MyUserDetails(AdminProfile adminProfile) {
+        this.username = adminProfile.getUsernameAdmin();
+        this.password = adminProfile.getPasswordAdmin();
+        this.active = adminProfile.isActive();
+        this.authorities = Arrays.stream(adminProfile.getRolesAdmin().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }

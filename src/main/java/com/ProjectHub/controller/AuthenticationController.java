@@ -84,6 +84,28 @@ public class AuthenticationController {
         }
     }
 
+    @PostMapping(value = "/adminLogin")
+    public ResponseEntity<?> createAuthenticationTokenAdmin(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        try {
+            HttpHeaders responseHeaders = new HttpHeaders();
+//            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+            final MyUserDetails userDetails = (MyUserDetails) userDetailsService.loadUserByUsernameAdmin(authenticationRequest.getUsername());
+            final String jwt = jwtTokenUtil.generateToken(userDetails);
+            AuthenticationResponse response = new AuthenticationResponse(jwt);
+
+            response.setUsername(userDetails.getUsername());
+            response.setUsername(userDetails.getFirstName());
+            response.setUsername(userDetails.getLastName());
+            List<String> roles = new ArrayList<>();
+            userDetails.getAuthorities().forEach((a) -> roles.add(a.getAuthority()));
+            response.setRoles(roles);
+
+            return new ResponseEntity<>(response, responseHeaders, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
     @PostMapping("/changePassword")
     public ResponseEntity<HttpStatus> changePassword(@RequestBody ChangePasswordModel changePasswordModel) {
         try {
