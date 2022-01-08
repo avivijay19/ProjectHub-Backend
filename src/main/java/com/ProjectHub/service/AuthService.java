@@ -6,6 +6,7 @@ import com.ProjectHub.model.ChangePasswordModel;
 import com.ProjectHub.repository.TeacherRepository;
 import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -18,11 +19,15 @@ public class AuthService {
     @Autowired
     TeacherRepository teacherRepository;
 
+    @Autowired
+    JavaMailSender javaMailSender;
+
     private boolean updateStudentPassword(String studentId, String newPassword, String oldPassword) {
         StudentProfile studentProfile = userRepository.findByUsername(studentId).get();
         if (Objects.equals(studentProfile.getPassword(), oldPassword)) {
             studentProfile.setPassword(newPassword);
             userRepository.save(studentProfile);
+            sendEmail(studentProfile.getEmailId(), studentProfile.getFirstName(), studentProfile.getLastName());
             return true;
         }
         return false;
