@@ -1,11 +1,13 @@
 spring:
   datasource:
-#    url: jdbc:postgresql://ec2-3-211-240-42.compute-1.amazonaws.com:5432/d3ic0h2elet5hv?sslmode=require
-    #    username: elvocvggsxrisf
-    #    password: 75287404f7006d71e17cf6b3a2e9abedf9aa29c91cc2746921dd8776569ace52
-    url: jdbc:mysql://db4free.net:3306/projecthub
-    username: projecthub
-    password: projecthub
+    url: jdbc:postgresql://ec2-35-169-119-56.compute-1.amazonaws.com:5432/d3jsec9cdc1p5k?sslmode=require
+    username: tvwsvvmcieeyyo
+    password: 72fb347b09c2312149ae23aa32861c0e33b4a7398c631faefeb799741d9cf443
+    hikari:
+      maximum-pool-size: 10
+    #    url: jdbc:mysql://db4free.net:3306/projecthub
+    #    username: projecthub
+    #    password: projecthub
 
     #    url: jdbc:postgresql://${RDS_HOST}:${RDS_PORT}/${RDS_DB_NAME}?sslmode=require
     #    username: ${RDS_USERNAME}
@@ -16,13 +18,13 @@ spring:
     #     password: root
 
     #maximum pool size #https://stackoverflow.com/a/68270053
-    hikari.max-pool-size: 15
+
 
   jpa:
     properties:
       hibernate:
-        #        dialect: org.hibernate.dialect.PostgresPlusDialect
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.PostgresPlusDialect
+    #        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
     show-sql: true
