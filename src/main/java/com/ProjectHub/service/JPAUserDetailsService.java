@@ -1,7 +1,9 @@
 package com.ProjectHub.service;
 
-import com.ProjectHub.model.MyUserDetails;
 import com.ProjectHub.entities.StudentProfile;
+import com.ProjectHub.entities.TeacherProfile;
+import com.ProjectHub.model.MyUserDetails;
+import com.ProjectHub.repository.TeacherRepository;
 import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,9 +23,18 @@ public class JPAUserDetailsService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TeacherRepository teacherRepository;
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<StudentProfile> user = userRepository.findByUsername(userName);
+        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
+        return user.map(MyUserDetails::new).get();
+    }
+
+    public UserDetails loadUserByEmployeeId(String userName) throws UsernameNotFoundException {
+        Optional<TeacherProfile> user = teacherRepository.findByEmployeeID(userName);
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
         return user.map(MyUserDetails::new).get();
     }
