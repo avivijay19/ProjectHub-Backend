@@ -6,6 +6,7 @@ import com.ProjectHub.model.ChangePasswordModel;
 import com.ProjectHub.repository.TeacherRepository;
 import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,14 @@ public class AuthService {
             return updateTeacherPassword(model.getId(), model.getNewPassword(), model.getOldPassword());
         }
         return false;
+    }
+
+    String sendEmail(String emailId, String firstName, String lastName) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(emailId);
+        msg.setSubject("Successfully Changed Password for ProjectHub.!");
+        msg.setText("Hello " + firstName + " " + lastName + ", \nYou Have successfully changed the password..! \nTeam ProjectHub");
+        javaMailSender.send(msg);
+        return "Mail Sent";
     }
 }
