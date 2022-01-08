@@ -17,23 +17,27 @@ import javax.persistence.Table;
 public class AdminProfile {
     @Id
     @Column(name = "username")
-    private String username;
+    private String usernameAdmin;
 
     @Column(name = "password")
-    private String password;
+    private String passwordAdmin;
 
     @Column(name = "firstName")
-    private String firstName;
+    private String firstNameAdmin;
 
     @Column(name = "lastName")
-    private String lastName;
+    private String lastNameAdmin;
 
     @Column(name = "department")
-    private String department;
+    private String departmentAdmin;
 
     @Column(name = "emailId")
-    private String emailId;
+    private String emailIdAdmin;
 
     @Column(name = "roles")
-    private String roles;
+    private String rolesAdmin;
+
+    public boolean isActive() {
+        return true;
+    }
 }
