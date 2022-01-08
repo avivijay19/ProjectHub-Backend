@@ -38,4 +38,8 @@ public class TeacherProfile {
 
     @Column(name = "roles")
     private String roles;
+
+    public boolean isActive() {
+        return true;
+    }
 }
