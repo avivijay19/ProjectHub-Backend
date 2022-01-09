@@ -23,6 +23,7 @@ import static com.ProjectHub.util.Constants.BEARER_AUTH;
 @RestController
 @SecurityRequirement(name = BEARER_AUTH)
 @PreAuthorize("hasRole('ROLE_TEACHER')")
+@RequestMapping("/api")
 public class TeacherController {
 
     @Autowired
