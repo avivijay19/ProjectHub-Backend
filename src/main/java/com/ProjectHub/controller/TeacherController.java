@@ -21,7 +21,6 @@ import static com.ProjectHub.util.Constants.BEARER_AUTH;
  */
 @RestController
 @SecurityRequirement(name = BEARER_AUTH)
-@RequestMapping("/api")
 public class TeacherController {
 
     @Autowired
