@@ -7,7 +7,6 @@ import com.ProjectHub.model.StudentProfileModel;
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.service.ProjectProfileService;
 import com.ProjectHub.service.StudentProfileService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ProjectHub.util.Constants.BEARER_AUTH;
-
 /**
  * Created by Avinash Vijayvargiya on 22-09-2021.
  */
 
 @RestController
-@SecurityRequirement(name = BEARER_AUTH)
 @RequestMapping("/api")
 public class StudentController {
 
