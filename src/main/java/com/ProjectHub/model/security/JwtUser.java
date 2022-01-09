@@ -1,18 +1,14 @@
-package com.ProjectHub.model;
+package com.ProjectHub.model.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
-/**
- * Created by Avinash Vijayvargiya on 02-10-2021.
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest implements Serializable {
+public class JwtUser {
     private String username;
     private String password;
+    private String role;
 }

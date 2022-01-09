@@ -1,10 +1,15 @@
 package com.ProjectHub.service;
 
+import com.ProjectHub.entities.AdminProfile;
 import com.ProjectHub.entities.StudentProfile;
 import com.ProjectHub.entities.TeacherProfile;
 import com.ProjectHub.model.ChangePasswordModel;
+import com.ProjectHub.model.security.JwtAuthenticationToken;
+import com.ProjectHub.model.security.JwtUser;
+import com.ProjectHub.repository.AdminRepository;
 import com.ProjectHub.repository.TeacherRepository;
 import com.ProjectHub.repository.UserRepository;
+import com.ProjectHub.security.jwt.JwtGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,7 +26,14 @@ public class AuthService {
     TeacherRepository teacherRepository;
 
     @Autowired
+    AdminRepository adminRepository;
+
+    @Autowired
     JavaMailSender javaMailSender;
+
+
+    @Autowired
+    private JwtGenerator jwtGenerator;
 
     private boolean updateStudentPassword(String studentId, String newPassword, String oldPassword) {
         StudentProfile studentProfile = userRepository.findByUsername(studentId).get();
@@ -60,5 +72,38 @@ public class AuthService {
         msg.setText("Hello " + firstName + " " + lastName + ", \nYou Have successfully changed the password..! \nTeam ProjectHub");
         javaMailSender.send(msg);
         return "Mail Sent";
+    }
+
+    public JwtAuthenticationToken studentLogin(JwtUser jwtUser) {
+        StudentProfile studentProfile = userRepository.findByUsername(jwtUser.getUsername()).get();
+        if (Objects.equals(studentProfile.getPassword(), jwtUser.getPassword())) {
+            jwtUser.setRole("ROLE_STUDENT");
+            String token = jwtGenerator.generate(jwtUser);
+            return new JwtAuthenticationToken(null, null, null,
+                    token, studentProfile.getFirstName(), studentProfile.getLastName(), studentProfile.getUsername());
+        }
+        return null;
+    }
+
+    public JwtAuthenticationToken teacherLogin(JwtUser jwtUser) {
+        TeacherProfile teacherProfile = teacherRepository.findByEmployeeID(jwtUser.getUsername()).get();
+        if (Objects.equals(teacherProfile.getPassword(), jwtUser.getPassword())) {
+            jwtUser.setRole("ROLE_TEACHER");
+            String token = jwtGenerator.generate(jwtUser);
+            return new JwtAuthenticationToken(null, null, null,
+                    token, teacherProfile.getFirstName(), teacherProfile.getLastName(), teacherProfile.getEmployeeID());
+        }
+        return null;
+    }
+
+    public JwtAuthenticationToken adminLogin(JwtUser jwtUser) {
+        AdminProfile adminProfile = adminRepository.findByUsernameAdmin(jwtUser.getUsername()).get();
+        if (Objects.equals(adminProfile.getPasswordAdmin(), jwtUser.getPassword())) {
+            jwtUser.setRole("ROLE_ADMIN");
+            String token = jwtGenerator.generate(jwtUser);
+            return new JwtAuthenticationToken(null, null, null,
+                    token, adminProfile.getFirstNameAdmin(), adminProfile.getLastNameAdmin(), adminProfile.getUsernameAdmin());
+        }
+        return null;
     }
 }
