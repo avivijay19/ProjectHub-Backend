@@ -92,7 +92,6 @@ public class StudentController {
         return ResponseEntity.ok(studentProfileService.getOngoingID(username));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')")
     @GetMapping("/projectDetails/{projectID}")
     public ResponseEntity<ProjectDetails> getProjectDetails(@PathVariable Long projectID) {
         try {

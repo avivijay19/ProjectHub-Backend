@@ -62,6 +62,7 @@ public class TeacherController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @GetMapping("/teacherProjectDetails/{projectID}")
     public ResponseEntity<ProjectDetails> getProjectDetails(@PathVariable Long projectID) {
         try {
