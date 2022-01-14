@@ -41,6 +41,7 @@ public class TeacherController {
      * @param id
      * @return
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/teacherProject")
     public ResponseEntity<List<Project>> getAllProjects(@RequestParam(required = false) Long id) {
         try {
@@ -71,6 +72,7 @@ public class TeacherController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STUDENT')")
     @GetMapping("/teacherProfile/{employeeID}")
     public ResponseEntity<TeacherProfileModel> getTeacherProfile(@PathVariable String employeeID) {
         try {

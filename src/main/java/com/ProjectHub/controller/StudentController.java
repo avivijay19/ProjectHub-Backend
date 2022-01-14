@@ -83,6 +83,7 @@ public class StudentController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @GetMapping("/studentProfileDetails/{studentID}")
     public ResponseEntity<StudentProfileModel> getStudentProfile(@PathVariable String studentID) {
         return ResponseEntity.ok(studentProfileService.getStudentProfileByUsername(studentID));
