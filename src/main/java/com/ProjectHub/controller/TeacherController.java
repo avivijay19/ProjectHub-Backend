@@ -72,7 +72,7 @@ public class TeacherController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STUDENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')")
     @GetMapping("/teacherProfile/{employeeID}")
     public ResponseEntity<TeacherProfileModel> getTeacherProfile(@PathVariable String employeeID) {
         try {
