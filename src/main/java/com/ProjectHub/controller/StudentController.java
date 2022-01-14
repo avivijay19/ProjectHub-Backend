@@ -47,10 +47,8 @@ public class StudentController {
         try {
             List<Project> tutorials = new ArrayList<>();
 
-            if (id == null)
-                tutorials.addAll(projectRepository.findAll());
-            else
-                tutorials.addAll(projectRepository.getProjectByProjectId(id));
+            if (id == null) tutorials.addAll(projectRepository.findAll());
+            else tutorials.addAll(projectRepository.getProjectByProjectId(id));
 
             if (tutorials.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -83,6 +81,7 @@ public class StudentController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')")
     @GetMapping("/studentProfileDetails/{studentID}")
     public ResponseEntity<StudentProfileModel> getStudentProfile(@PathVariable String studentID) {
         return ResponseEntity.ok(studentProfileService.getStudentProfileByUsername(studentID));
