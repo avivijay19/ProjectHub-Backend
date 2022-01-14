@@ -19,7 +19,7 @@ public class JwtGenerator {
                 setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 6))
-                .signWith(SignatureAlgorithm.HS512, "tolusecret")
+                .signWith(SignatureAlgorithm.HS256, "tolusecret")
                 .setHeaderParam("Type", "JWT")
                 .compact();
     }
