@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import static com.ProjectHub.util.Constants.BEARER_AUTH;
  */
 @RestController
 @SecurityRequirement(name = BEARER_AUTH)
+@PreAuthorize("hasRole('ROLE_TEACHER')")
 @RequestMapping("/api")
 public class TeacherController {
 
@@ -39,6 +41,7 @@ public class TeacherController {
      * @param id
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @GetMapping("/teacherProject")
     public ResponseEntity<List<Project>> getAllProjects(@RequestParam(required = false) Long id) {
         try {
@@ -59,6 +62,7 @@ public class TeacherController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')")
     @GetMapping("/teacherProjectDetails/{projectID}")
     public ResponseEntity<ProjectDetails> getProjectDetails(@PathVariable Long projectID) {
         try {
@@ -69,6 +73,7 @@ public class TeacherController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')")
     @GetMapping("/teacherProfile/{employeeID}")
     public ResponseEntity<TeacherProfileModel> getTeacherProfile(@PathVariable String employeeID) {
         try {

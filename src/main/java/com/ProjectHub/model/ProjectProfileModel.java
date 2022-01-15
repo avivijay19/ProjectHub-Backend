@@ -11,7 +11,7 @@ This project model is for project cards on profile page
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectProfileModel {
-    private Long projectID;
+    private Long projectId;
     private String projectTitle;
     private String projectDomain;
     private String description;

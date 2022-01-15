@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,8 +24,9 @@ import static com.ProjectHub.util.Constants.BEARER_AUTH;
  */
 
 @RestController
-@SecurityRequirement(name = BEARER_AUTH)
 @RequestMapping("/api")
+@SecurityRequirement(name = BEARER_AUTH)
+@PreAuthorize("hasRole('ROLE_STUDENT')")
 public class StudentController {
 
     @Autowired
@@ -45,10 +47,8 @@ public class StudentController {
         try {
             List<Project> tutorials = new ArrayList<>();
 
-            if (id == null)
-                tutorials.addAll(projectRepository.findAll());
-            else
-                tutorials.addAll(projectRepository.getProjectByProjectId(id));
+            if (id == null) tutorials.addAll(projectRepository.findAll());
+            else tutorials.addAll(projectRepository.getProjectByProjectId(id));
 
             if (tutorials.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -81,6 +81,7 @@ public class StudentController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')")
     @GetMapping("/studentProfileDetails/{studentID}")
     public ResponseEntity<StudentProfileModel> getStudentProfile(@PathVariable String studentID) {
         return ResponseEntity.ok(studentProfileService.getStudentProfileByUsername(studentID));

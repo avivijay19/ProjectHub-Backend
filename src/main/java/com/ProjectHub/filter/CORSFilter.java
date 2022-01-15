@@ -15,9 +15,10 @@ import java.io.IOException;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
+    public static String VALID_METHODS = "DELETE, HEAD, GET, OPTIONS, POST, PUT";
+
     public void destroy() {
     }
-    public static String VALID_METHODS = "DELETE, HEAD, GET, OPTIONS, POST, PUT";
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest httpReq = (HttpServletRequest) req;
@@ -50,8 +51,7 @@ public class CORSFilter implements Filter {
         }
     }
 
-    public void init(FilterConfig config) throws ServletException {
-
+    public void init(FilterConfig config) {
     }
 
 }

@@ -1,58 +1,82 @@
 package com.ProjectHub.controller;
 
-import com.ProjectHub.model.AuthenticationRequest;
-import com.ProjectHub.model.AuthenticationResponse;
-import com.ProjectHub.model.MyUserDetails;
-import com.ProjectHub.service.JPAUserDetailsService;
-import com.ProjectHub.util.JwtUtil;
+import com.ProjectHub.model.ChangePasswordModel;
+import com.ProjectHub.model.security.JwtAuthenticationToken;
+import com.ProjectHub.model.security.JwtUser;
+import com.ProjectHub.service.AuthService;
+import com.ProjectHub.util.Endpoints;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Avinash Vijayvargiya on 02-10-2021.
  */
 @RestController
+@RequestMapping(Endpoints.AUTH)
 public class AuthenticationController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private AuthService authService;
 
-    @Autowired
-    private JwtUtil jwtTokenUtil;
 
-    @Autowired
-    private JPAUserDetailsService userDetailsService;
+    @PostMapping("/studentLogin")
+    public ResponseEntity<JwtAuthenticationToken> studentLogin(@RequestBody final JwtUser jwtUser) {
+        try {
+            JwtAuthenticationToken jwtAuthenticationToken = authService.studentLogin(jwtUser);
+            if (jwtAuthenticationToken != null) {
+                return new ResponseEntity<>(jwtAuthenticationToken, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+            }
+        } catch (Exception e) {
+            System.out.println("studentLogin: " + e);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
 
-    @PostMapping(value = "/studentLogin")
-    //@CrossOrigin
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        HttpHeaders responseHeaders = new HttpHeaders();
+    @PostMapping("/teacherLogin")
+    public ResponseEntity<JwtAuthenticationToken> teacherLogin(@RequestBody final JwtUser jwtUser) {
+        try {
+            JwtAuthenticationToken jwtAuthenticationToken = authService.teacherLogin(jwtUser);
+            if (jwtAuthenticationToken != null) {
+                return new ResponseEntity<>(jwtAuthenticationToken, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+            }
+        } catch (Exception e) {
+            System.out.println("teacherLogin: " + e);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
 
-        Authentication authenticate = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
-        );
-        final MyUserDetails userDetails = (MyUserDetails) userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
-        AuthenticationResponse response = new AuthenticationResponse(jwt);
+    @PostMapping("/adminLogin")
+    public ResponseEntity<JwtAuthenticationToken> adminLogin(@RequestBody final JwtUser jwtUser) {
+        try {
+            JwtAuthenticationToken jwtAuthenticationToken = authService.adminLogin(jwtUser);
+            if (jwtAuthenticationToken != null) {
+                return new ResponseEntity<>(jwtAuthenticationToken, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+            }
+        } catch (Exception e) {
+            System.out.println("adminLogin: " + e);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
 
-        response.setUsername(userDetails.getUsername());
-        List<String> roles = new ArrayList<>();
-        userDetails.getAuthorities().forEach((a) -> roles.add(a.getAuthority()));
-        response.setRoles(roles);
-
-        return new ResponseEntity<>(response, responseHeaders, HttpStatus.OK);
-
+    @PostMapping("/changePassword")
+    public ResponseEntity<HttpStatus> changePassword(@RequestBody ChangePasswordModel changePasswordModel) {
+        try {
+            boolean status = authService.changePassword(changePasswordModel);
+            if (status) return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -31,7 +31,7 @@ public class ProjectProfileService {
         Project project = projectRepository.findByProjectId(projectID);
 
         if (project != null) {
-            projectProfileModel.setProjectID(project.getProjectId());
+            projectProfileModel.setProjectId(project.getProjectId());
             projectProfileModel.setProjectDomain(project.getProjectDomain());
             projectProfileModel.setProjectTitle(project.getProjectTitle());
             projectProfileModel.setDescription(project.getDescription());
@@ -59,7 +59,7 @@ public class ProjectProfileService {
     }
 
     private Map<String, String> mapStudentDetails(StudentProfile studentProfile) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("id", String.valueOf(studentProfile.getUsername()));
         map.put("name", studentProfile.getFirstName() + " " + studentProfile.getLastName());
         return map;
@@ -71,7 +71,7 @@ public class ProjectProfileService {
         TeacherProfile guide = teacherRepository.findById(String.valueOf(project.getGuideID())).get();
         String guideName = guide.getFirstName() + " " + guide.getLastName();
 
-        Map<String, String> guideMap = new HashMap<String, String>();
+        Map<String, String> guideMap = new HashMap<>();
         guideMap.put("id", String.valueOf(project.getGuideID()));
         guideMap.put("name", guideName);
 
@@ -81,12 +81,8 @@ public class ProjectProfileService {
         StudentProfile student4 = userRepository.findByUsername(String.valueOf(project.getStudent4id())).get();
         StudentProfile student5 = project.getStudent5id() != null ? userRepository.findByUsername(String.valueOf(project.getStudent5id())).get() : null;
 
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("id", null);
-        map.put("name", null);
-
         String[] tokens = project.getProjectInfo().split("#");
-        Map<String, String> projectInfo = new HashMap<String, String>();
+        Map<String, String> projectInfo = new HashMap<>();
         projectInfo.put("yearInfo", "EDAI " + tokens[0] + " " + tokens[1]);
         projectInfo.put("groupInfo", tokens[2]);
 
@@ -103,7 +99,7 @@ public class ProjectProfileService {
                 mapStudentDetails(student2),
                 mapStudentDetails(student3),
                 mapStudentDetails(student4),
-                student5 == null ? map : mapStudentDetails(student5),
+                student5 == null ? null : mapStudentDetails(student5),
                 project.getDeadline()
         );
         return projectDetails;
@@ -120,6 +116,37 @@ public class ProjectProfileService {
         return teacherOngoingProjectModelList;
     }
 
+    private void updateProjectInStudent(Long projectId, String studentId, int semNum) {
+        StudentProfile student = userRepository.findByUsername(studentId).get();
+        switch (semNum) {
+            case 1:
+                student.setProject1id(projectId);
+                break;
+            case 2:
+                student.setProject2id(projectId);
+                break;
+            case 3:
+                student.setProject3id(projectId);
+                break;
+            case 4:
+                student.setProject4id(projectId);
+                break;
+            case 5:
+                student.setProject5id(projectId);
+                break;
+            case 6:
+                student.setProject6id(projectId);
+                break;
+            case 7:
+                student.setProject7id(projectId);
+                break;
+            case 8:
+                student.setProject8id(projectId);
+                break;
+        }
+        userRepository.save(student);
+    }
+
     public void insertProject(NewProjectModel newProjectModel) {
         Project project = new Project();
 
@@ -134,8 +161,30 @@ public class ProjectProfileService {
 
         projectRepository.save(project);
 
-        /*long pk = project.getProjectId();
-        System.out.println("Auto generated key: " + pk);*/
+        long pk = project.getProjectId();
+        //        System.out.println("Auto generated key: " + pk);
+
+        /* determine project column number */
+        Map<String, Integer> yearMap = new HashMap<>();
+        yearMap.put("FY", 0);
+        yearMap.put("SY", 1);
+        yearMap.put("TY", 2);
+        yearMap.put("BTech", 3);
+
+        String[] separateInfo = newProjectModel.getProjectInfo().split("#");
+        int sem = Integer.parseInt(separateInfo[1].split(" ")[1]);
+        int year = yearMap.get(separateInfo[2].split("-")[0]);
+        //        System.out.println(year + " " + sem + " " + (2 * year + sem));
+
+        /* assign project id to all 4/5 students */
+        int semNum = 2 * year + sem;
+        updateProjectInStudent(pk, String.valueOf(newProjectModel.getStudent1ID()), semNum);
+        updateProjectInStudent(pk, String.valueOf(newProjectModel.getStudent2ID()), semNum);
+        updateProjectInStudent(pk, String.valueOf(newProjectModel.getStudent3ID()), semNum);
+        updateProjectInStudent(pk, String.valueOf(newProjectModel.getStudent4ID()), semNum);
+        if (newProjectModel.getStudent5ID() != null)
+            updateProjectInStudent(pk, String.valueOf(newProjectModel.getStudent5ID()), semNum);
+
     }
 
     public void updateDeadline(ProjectDeadlineModel projectDeadlineModel) {

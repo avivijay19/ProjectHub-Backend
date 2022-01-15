@@ -5,6 +5,7 @@ import com.ProjectHub.entities.StudentProfile;
 import com.ProjectHub.entities.TeacherProfile;
 import com.ProjectHub.model.ResponseMessage;
 import com.ProjectHub.service.CSVService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,11 +21,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 import java.util.Objects;
 
+import static com.ProjectHub.util.Constants.BEARER_AUTH;
+
 /**
  * Created by Avinash Vijayvargiya on 10-10-2021.
  */
 @RestController
-@RequestMapping("/api/csv")
+@RequestMapping("/api")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
+@SecurityRequirement(name = BEARER_AUTH)
 public class AdminController {
 
     @Autowired
