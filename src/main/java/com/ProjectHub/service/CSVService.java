@@ -41,13 +41,11 @@ public class CSVService {
 
     public ByteArrayInputStream loadStudent() {
         List<StudentProfile> studentProfiles = repository.findAll();
-
         return CSVHelper.studentToCSV(studentProfiles);
     }
 
     public ByteArrayInputStream loadTeacher() {
         List<TeacherProfile> teacherProfiles = teacherRepository.findAll();
-
         return CSVHelper.teacherToCSV(teacherProfiles);
     }
 

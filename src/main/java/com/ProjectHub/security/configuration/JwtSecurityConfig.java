@@ -50,7 +50,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable()
                 .authorizeRequests().antMatchers(
                         Endpoints.AUTH + "/**",
-                        "/api/**",
+                        "/auth/**",
                         "/v3/**",
                         "/swagger-resources/**",
                         "/swagger-ui/**",
