@@ -10,9 +10,7 @@ import com.ProjectHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -105,16 +103,16 @@ public class ProjectProfileService {
         return projectDetails;
     }
 
-    public List<TeacherOngoingProjectModel> getTeacherOngoingCardDetails(String teacherID) {
-        List<Project> projectList = projectRepository.findAllByTeacherId(Long.valueOf(teacherID), "0");
-
-        List<TeacherOngoingProjectModel> teacherOngoingProjectModelList = new ArrayList<>();
-        for (Project project : projectList) {
-            teacherOngoingProjectModelList.add(new TeacherOngoingProjectModel(project));
-        }
-
-        return teacherOngoingProjectModelList;
-    }
+//    public List<TeacherOngoingProjectModel> getTeacherOngoingCardDetails(String teacherID) {
+//        List<Project> projectList = projectRepository.findAllByTeacherId(Long.valueOf(teacherID), "0");
+//
+//        List<TeacherOngoingProjectModel> teacherOngoingProjectModelList = new ArrayList<>();
+//        for (Project project : projectList) {
+//            teacherOngoingProjectModelList.add(new TeacherOngoingProjectModel(project));
+//        }
+//
+//        return teacherOngoingProjectModelList;
+//    }
 
     private void updateProjectInStudent(Long projectId, String studentId, int semNum) {
         StudentProfile student = userRepository.findByUsername(studentId).get();

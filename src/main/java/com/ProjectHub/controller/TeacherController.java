@@ -1,7 +1,9 @@
 package com.ProjectHub.controller;
 
 import com.ProjectHub.entities.Project;
-import com.ProjectHub.model.*;
+import com.ProjectHub.model.NewProjectModel;
+import com.ProjectHub.model.ProjectDeadlineModel;
+import com.ProjectHub.model.ProjectDetails;
 import com.ProjectHub.repository.ProjectRepository;
 import com.ProjectHub.service.ProjectProfileService;
 import com.ProjectHub.service.TeacherProfileService;
@@ -73,26 +75,26 @@ public class TeacherController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')")
-    @GetMapping("/teacherProfile/{employeeID}")
-    public ResponseEntity<TeacherProfileModel> getTeacherProfile(@PathVariable String employeeID) {
-        try {
-            TeacherProfileModel teacher = teacherProfileService.getTeacherProfileByUsername(employeeID);
-            return new ResponseEntity<>(teacher, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT')")
+//    @GetMapping("/teacherProfile/{employeeID}")
+//    public ResponseEntity<TeacherProfileModel> getTeacherProfile(@PathVariable String employeeID) {
+//        try {
+//            TeacherProfileModel teacher = teacherProfileService.getTeacherProfileByUsername(employeeID);
+//            return new ResponseEntity<>(teacher, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//    }
 
-    @GetMapping("/teacherOngoing/{employeeID}")
-    public ResponseEntity<List<TeacherOngoingProjectModel>> getTeacherOngoing(@PathVariable String employeeID) {
-        try {
-            List<TeacherOngoingProjectModel> teacherOngoing = projectProfileService.getTeacherOngoingCardDetails(employeeID);
-            return new ResponseEntity<>(teacherOngoing, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping("/teacherOngoing/{employeeID}")
+//    public ResponseEntity<List<TeacherOngoingProjectModel>> getTeacherOngoing(@PathVariable String employeeID) {
+//        try {
+//            List<TeacherOngoingProjectModel> teacherOngoing = projectProfileService.getTeacherOngoingCardDetails(employeeID);
+//            return new ResponseEntity<>(teacherOngoing, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     @PostMapping("/addNewProject")
     public ResponseEntity<HttpStatus> addNewProject(@RequestBody NewProjectModel newProjectModel) {
