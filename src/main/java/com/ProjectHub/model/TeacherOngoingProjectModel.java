@@ -1,6 +1,6 @@
 package com.ProjectHub.model;
 
-import com.ProjectHub.entities.Project;
+import com.ProjectHub.documents.Project;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.ProjectHub.controller;
 
-import com.ProjectHub.entities.Project;
+import com.ProjectHub.documents.Project;
 import com.ProjectHub.model.ProjectDetails;
 import com.ProjectHub.model.ProjectSubmissionModel;
 import com.ProjectHub.model.StudentProfileModel;

@@ -1,4 +1,4 @@
-package com.ProjectHub.entities;
+package com.ProjectHub.documents;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.ProjectHub.repository;
 
-import com.ProjectHub.entities.AdminProfile;
+import com.ProjectHub.documents.AdminProfile;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package com.ProjectHub;
 
-import com.ProjectHub.entities.StudentProfile;
-import com.ProjectHub.entities.TeacherProfile;
+import com.ProjectHub.documents.StudentProfile;
+import com.ProjectHub.documents.TeacherProfile;
 import org.apache.commons.csv.*;
 import org.springframework.web.multipart.MultipartFile;
 

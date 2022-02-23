@@ -1,6 +1,6 @@
 package com.ProjectHub.repository;
 
-import com.ProjectHub.entities.StudentProfile;
+import com.ProjectHub.documents.StudentProfile;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

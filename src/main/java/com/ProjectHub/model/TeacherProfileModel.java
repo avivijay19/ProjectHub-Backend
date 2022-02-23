@@ -1,6 +1,6 @@
 package com.ProjectHub.model;
 
-import com.ProjectHub.entities.TeacherProfile;
+import com.ProjectHub.documents.TeacherProfile;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

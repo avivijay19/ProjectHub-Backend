@@ -1,6 +1,6 @@
 package com.ProjectHub.service;
 
-import com.ProjectHub.entities.StudentProfile;
+import com.ProjectHub.documents.StudentProfile;
 import com.ProjectHub.exceptions.ResourceNotFoundException;
 import com.ProjectHub.model.ProjectProfileModel;
 import com.ProjectHub.model.StudentProfileModel;

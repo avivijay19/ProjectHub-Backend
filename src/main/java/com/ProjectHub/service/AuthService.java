@@ -1,8 +1,8 @@
 package com.ProjectHub.service;
 
-import com.ProjectHub.entities.AdminProfile;
-import com.ProjectHub.entities.StudentProfile;
-import com.ProjectHub.entities.TeacherProfile;
+import com.ProjectHub.documents.AdminProfile;
+import com.ProjectHub.documents.StudentProfile;
+import com.ProjectHub.documents.TeacherProfile;
 import com.ProjectHub.model.ChangePasswordModel;
 import com.ProjectHub.model.security.JwtAuthenticationToken;
 import com.ProjectHub.model.security.JwtUser;

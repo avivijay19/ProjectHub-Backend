@@ -1,8 +1,8 @@
 package com.ProjectHub.controller;
 
 import com.ProjectHub.CSVHelper;
-import com.ProjectHub.entities.StudentProfile;
-import com.ProjectHub.entities.TeacherProfile;
+import com.ProjectHub.documents.StudentProfile;
+import com.ProjectHub.documents.TeacherProfile;
 import com.ProjectHub.model.ResponseMessage;
 import com.ProjectHub.service.CSVService;
 import org.springframework.beans.factory.annotation.Autowired;
